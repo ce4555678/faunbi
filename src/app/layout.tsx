@@ -14,6 +14,94 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: {
+    default: "Faunbi — Gestão inteligente para autônomos",
+    template: "%s | Faunbi",
+  },
+  description:
+    "Organize clientes, pedidos, estoque, agenda e financeiro em uma plataforma simples, moderna e com assistente de IA para automatizar sua rotina.",
+
+  applicationName: "Faunbi",
+
+  authors: [{ name: "Faunbi" }],
+
+  creator: "Faunbi",
+  publisher: "Faunbi",
+
+  manifest: "/manifest.webmanifest",
+
+  keywords: [
+    "Faunbi",
+    "gestão para autônomos",
+    "sistema para pequenos negócios",
+    "controle financeiro",
+    "controle de estoque",
+    "gestão de pedidos",
+    "orçamentos online",
+    "agenda para serviços",
+    "assistente de IA",
+    "SaaS para autônomos",
+  ],
+
+  icons: {
+    icon: [
+      {
+        url: "/icon512_rounded.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: "/icon512_rounded.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/icon512_maskable.png",
+      },
+    ],
+  },
+
+  openGraph: {
+    title: "Faunbi — Gestão inteligente para autônomos",
+    description:
+      "Controle clientes, pedidos, estoque, agenda e financeiro com uma plataforma simples, rápida e impulsionada por IA.",
+    url: "https://faunbi.com",
+    siteName: "Faunbi",
+    locale: "pt_BR",
+    type: "website",
+    images: [
+      {
+        url: "https://faunbi.com/og-image.avif",
+        width: 1200,
+        height: 630,
+        alt: "Faunbi — Gestão inteligente para autônomos e pequenos negócios",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Faunbi — Gestão inteligente para autônomos",
+    description:
+      "Clientes, pedidos, estoque, agenda e financeiro em um só lugar, com IA para simplificar sua rotina.",
+    images: ["https://faunbi.com/og-image.avif"],
+  },
+
+  alternates: {
+    canonical: "https://faunbi.com",
+  },
+
+  category: "business",
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
