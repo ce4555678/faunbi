@@ -82,8 +82,8 @@ export default function FeaturesLandingUi() {
     >
       {/* Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-10 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-blue-600/10 blur-[130px] dark:bg-blue-500/10" />
-        <div className="absolute right-0 bottom-0 h-[420px] w-[420px] rounded-full bg-cyan-500/10 blur-[120px] dark:bg-cyan-400/10" />
+        <div className="absolute top-10 left-1/2 h-130 w-130 -translate-x-1/2 rounded-full bg-blue-600/10 blur-[130px] dark:bg-blue-500/10" />
+        <div className="absolute right-0 bottom-0 h-105 w-105 rounded-full bg-cyan-500/10 blur-[120px] dark:bg-cyan-400/10" />
         <div className="absolute top-0 left-0 h-full w-full bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.08),transparent_35%),linear-gradient(to_bottom,transparent,rgba(255,255,255,0.7))] dark:bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_35%),linear-gradient(to_bottom,transparent,rgba(2,6,23,0.8))]" />
 
         <div
@@ -126,7 +126,7 @@ export default function FeaturesLandingUi() {
                 "group relative overflow-hidden rounded-3xl border transition-all duration-300",
                 "hover:-translate-y-1 hover:shadow-2xl",
                 feature.highlight
-                  ? "border-blue-500/25 bg-blue-600 p-7 text-white shadow-2xl shadow-blue-600/25 dark:border-blue-400/20 dark:bg-blue-500/95 lg:col-span-2 lg:row-span-2 lg:min-h-[430px]"
+                  ? "border-blue-500/25 bg-blue-600 p-7 text-white shadow-2xl shadow-blue-600/25 dark:border-blue-400/20 dark:bg-blue-500/95 lg:col-span-2 lg:row-span-2 lg:min-h-107.5"
                   : "border-slate-200 bg-white/80 p-6 shadow-sm shadow-slate-950/5 backdrop-blur-xl hover:border-blue-500/30 hover:shadow-blue-950/10 dark:border-slate-800 dark:bg-slate-950/70 dark:hover:border-blue-400/30 dark:hover:shadow-blue-500/10"
               )}
               style={{

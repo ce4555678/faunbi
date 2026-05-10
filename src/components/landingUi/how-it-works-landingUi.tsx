@@ -80,8 +80,8 @@ export default function HowItWorksLandingUi() {
     >
       {/* Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-blue-600/10 blur-[130px] dark:bg-blue-500/10" />
-        <div className="absolute right-0 bottom-0 h-[420px] w-[420px] rounded-full bg-cyan-500/10 blur-[120px] dark:bg-cyan-400/10" />
+        <div className="absolute top-0 left-1/2 h-130 w-130 -translate-x-1/2 rounded-full bg-blue-600/10 blur-[130px] dark:bg-blue-500/10" />
+        <div className="absolute right-0 bottom-0 h-105 w-105 rounded-full bg-cyan-500/10 blur-[120px] dark:bg-cyan-400/10" />
 
         <div
           className="absolute inset-0 opacity-[0.05] dark:opacity-[0.08]"
@@ -233,7 +233,7 @@ export default function HowItWorksLandingUi() {
               </div>
 
               {/* Chat Content */}
-              <div className="relative min-h-[360px] space-y-5 bg-linear-to-b from-white to-slate-50 p-5 sm:p-6 dark:from-slate-950 dark:to-slate-900">
+              <div className="relative min-h-90 space-y-5 bg-linear-to-b from-white to-slate-50 p-5 sm:p-6 dark:from-slate-950 dark:to-slate-900">
                 {/* Active status */}
                 <div className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-sm dark:border-slate-800 dark:bg-slate-950/70">
                   <div className="flex items-center gap-3">

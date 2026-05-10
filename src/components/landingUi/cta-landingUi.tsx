@@ -16,8 +16,8 @@ export function CTALandingUi() {
       {/* Background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.12),transparent_35%),linear-gradient(to_bottom,transparent,rgba(37,99,235,0.04))] dark:bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.18),transparent_35%),linear-gradient(to_bottom,transparent,rgba(2,6,23,0.7))]" />
-        <div className="absolute top-1/2 left-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/15 blur-[150px] dark:bg-blue-500/15" />
-        <div className="absolute right-0 bottom-0 h-[360px] w-[360px] rounded-full bg-cyan-500/10 blur-[120px] dark:bg-cyan-400/10" />
+        <div className="absolute top-1/2 left-1/2 h-155 w-155 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/15 blur-[150px] dark:bg-blue-500/15" />
+        <div className="absolute right-0 bottom-0 h-90 w-90 rounded-full bg-cyan-500/10 blur-[120px] dark:bg-cyan-400/10" />
 
         <div
           className="absolute inset-0 opacity-[0.045] dark:opacity-[0.07]"
