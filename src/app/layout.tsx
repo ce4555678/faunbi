@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { ptBR } from "@clerk/localizations"
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 const interHeading = Inter({ subsets: ["latin"], variable: "--font-heading" })
 
@@ -109,7 +110,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       suppressHydrationWarning
       className={cn(
         "antialiased",
@@ -121,7 +122,11 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <ClerkProvider localization={ptBR}>{children}</ClerkProvider>
+          <ClerkProvider localization={ptBR}>
+            <NuqsAdapter>
+              {children}
+            </NuqsAdapter>
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>
