@@ -24,12 +24,6 @@ import {
 import Image from "next/image"
 
 const data = {
-  user: {
-    name: "Carlos Eduardo",
-    email: "ce4555678@gmail.com",
-    avatar: "",
-  },
-
   navMain: [
     {
       title: "Assistente",
@@ -146,7 +140,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border/70 p-2">
-        <NavUser user={data.user} />
+        <NavUser/>
       </SidebarFooter>
     </Sidebar>
   )

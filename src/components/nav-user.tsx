@@ -16,6 +16,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useUser } from "@clerk/nextjs"
 import {
   BadgeCheckIcon,
   BellIcon,
@@ -25,23 +26,17 @@ import {
   SparklesIcon,
 } from "lucide-react"
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string
-    email: string
-    avatar: string
-  }
-}) {
+export function NavUser() {
   const { isMobile } = useSidebar()
-
-  const fallback = user.name
-    .split(" ")
-    .map((name) => name[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase()
+  const { user } = useUser()
+  const fallback =
+    user?.fullName &&
+    user.fullName
+      .split(" ")
+      .map((name) => name[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase()
 
   return (
     <SidebarMenu>
@@ -56,16 +51,19 @@ export function NavUser({
             }
           >
             <Avatar className="size-8 rounded-lg">
-              <AvatarImage src={user.avatar} alt={user.name} />
+              <AvatarImage
+                src={user?.imageUrl}
+                alt={user?.fullName || "User"}
+              />
               <AvatarFallback className="rounded-lg text-xs">
                 {fallback}
               </AvatarFallback>
             </Avatar>
 
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">{user.name}</span>
+              <span className="truncate font-medium">{user?.fullName}</span>
               <span className="truncate text-xs text-muted-foreground">
-                {user.email}
+                {user?.emailAddresses?.[0]?.emailAddress}
               </span>
             </div>
 
@@ -82,16 +80,21 @@ export function NavUser({
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-2 py-2 text-left text-sm">
                   <Avatar className="size-8 rounded-lg">
-                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarImage
+                      src={user?.imageUrl}
+                      alt={user?.fullName || "User"}
+                    />
                     <AvatarFallback className="rounded-lg text-xs">
                       {fallback}
                     </AvatarFallback>
                   </Avatar>
 
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">{user.name}</span>
+                    <span className="truncate font-medium">
+                      {user?.fullName}
+                    </span>
                     <span className="truncate text-xs text-muted-foreground">
-                      {user.email}
+                      {user?.emailAddresses?.[0]?.emailAddress}
                     </span>
                   </div>
                 </div>
