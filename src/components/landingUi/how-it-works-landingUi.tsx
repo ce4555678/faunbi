@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 const steps = [
   {
@@ -242,7 +243,13 @@ export default function HowItWorksLandingUi() {
                 <div className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-sm dark:border-slate-800 dark:bg-slate-950/70">
                   <div className="flex items-center gap-3">
                     <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-200">
-                      <Sparkles className="h-4 w-4" />
+                      <Image
+                        src="/faunbi.svg"
+                        alt="Faunbi Logo"
+                        width={16}
+                        height={16}
+                        className="h-4 w-4"
+                      />
                       <span className="absolute right-0 bottom-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500 dark:border-slate-950" />
                     </div>
 
@@ -273,7 +280,13 @@ export default function HowItWorksLandingUi() {
                 {/* AI Response */}
                 <div className="flex gap-3">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-blue-100 to-cyan-100 text-blue-700 ring-1 ring-blue-500/10 dark:from-blue-950 dark:to-cyan-950 dark:text-blue-200 dark:ring-blue-400/10">
-                    <Sparkles className="h-4 w-4" />
+                    <Image
+                      src="/faunbi.svg"
+                      alt="Faunbi Logo"
+                      width={16}
+                      height={16}
+                      className="h-4 w-4"
+                    />
                   </div>
 
                   <div className="max-w-[88%] rounded-3xl rounded-tl-md border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-slate-800 dark:bg-slate-950">

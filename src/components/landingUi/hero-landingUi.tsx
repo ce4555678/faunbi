@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image" // Importado para Next.js Image
 import { Button } from "@/components/ui/button"
 import {
   MessageSquare,
@@ -9,11 +10,11 @@ import {
   Users,
   Package,
   Wallet,
-  Sparkles,
   Mic,
   Send,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { SignUpButton } from "@clerk/nextjs"
 
 const typingExamples = [
   "Agendar corte para Maria às 15h amanhã",
@@ -74,11 +75,9 @@ export default function HeroLandingUi() {
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background pt-16 text-foreground">
       {/* Animated Background */}
       <div className="absolute inset-0 -z-10">
-        {/* Gradient Orbs */}
         <div className="absolute top-1/4 left-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full bg-blue-600/25 blur-[120px] dark:bg-blue-500/20" />
         <div className="absolute right-1/4 bottom-1/4 h-100 w-100 animate-pulse rounded-full bg-cyan-500/20 blur-[100px] delay-1000 dark:bg-cyan-400/15" />
 
-        {/* Grid Pattern */}
         <div
           className="absolute inset-0 opacity-[0.06] dark:opacity-[0.08]"
           style={{
@@ -86,8 +85,6 @@ export default function HeroLandingUi() {
             backgroundSize: "60px 60px",
           }}
         />
-
-        {/* Subtle Vignette */}
         <div className="absolute inset-0 bg-radial-[circle_at_center] from-transparent via-transparent to-background/80" />
       </div>
 
@@ -110,15 +107,20 @@ export default function HeroLandingUi() {
 
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-32 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Badge */}
+          {/* Badge - Trocado Sparkles por faunbi.svg */}
           <div className="mb-8 inline-flex animate-in items-center gap-2 rounded-full border border-blue-500/30 bg-blue-50 px-4 py-2 shadow-sm duration-700 fade-in slide-in-from-bottom-4 dark:border-blue-400/25 dark:bg-blue-950/40">
-            <Sparkles className="h-4 w-4 text-blue-600 dark:text-blue-300" />
+            <Image
+              src="/faunbi.svg"
+              alt="Faunbi Logo"
+              width={16}
+              height={16}
+              className="h-4 w-4"
+            />
             <span className="text-sm font-semibold text-blue-700 dark:text-blue-200">
               Gestão por IA Conversacional
             </span>
           </div>
 
-          {/* Headline */}
           <h1 className="mb-6 animate-in text-4xl leading-[1.1] font-bold tracking-tight text-slate-950 delay-100 duration-700 fade-in slide-in-from-bottom-4 sm:text-5xl md:text-6xl lg:text-7xl dark:text-white">
             <span className="text-balance">Gerencie seu negócio</span>
             <br />
@@ -127,7 +129,6 @@ export default function HeroLandingUi() {
             </span>
           </h1>
 
-          {/* Subheadline */}
           <p className="mx-auto mb-10 max-w-2xl animate-in text-lg leading-relaxed text-pretty text-slate-700 delay-200 duration-700 fade-in slide-in-from-bottom-4 sm:text-xl dark:text-slate-300">
             Agenda, clientes, pedidos, estoque e finanças — tudo em um chat
             inteligente. Feito para pintores, eletricistas, manicures,
@@ -138,8 +139,15 @@ export default function HeroLandingUi() {
           <div className="relative mx-auto mb-10 max-w-xl animate-in delay-300 duration-700 fade-in slide-in-from-bottom-4">
             <div className="relative rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-2xl shadow-blue-950/10 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/90 dark:shadow-blue-500/5">
               <div className="mb-4 flex items-center gap-3 border-b border-slate-200 pb-3 dark:border-slate-800">
+                {/* Avatar - Trocado Sparkles por faunbi.svg */}
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-500/20">
-                  <Sparkles className="h-4 w-4 text-blue-700 dark:text-blue-300" />
+                  <Image
+                    src="/faunbi.svg"
+                    alt="Faunbi"
+                    width={16}
+                    height={16}
+                    className="h-4 w-4"
+                  />
                 </div>
 
                 <div className="text-left">
@@ -163,7 +171,6 @@ export default function HeroLandingUi() {
                 <div className="flex shrink-0 items-center gap-2">
                   <button
                     type="button"
-                    aria-label="Enviar áudio"
                     className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
                   >
                     <Mic className="h-4 w-4" />
@@ -171,7 +178,6 @@ export default function HeroLandingUi() {
 
                   <button
                     type="button"
-                    aria-label="Enviar mensagem"
                     className="rounded-lg bg-blue-600 p-2 text-white shadow-lg shadow-blue-600/20 transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
                   >
                     <Send className="h-4 w-4" />
@@ -180,28 +186,27 @@ export default function HeroLandingUi() {
               </div>
             </div>
 
-            {/* Glow Effect */}
             <div className="absolute -inset-1 -z-10 rounded-2xl bg-linear-to-r from-blue-600/25 via-cyan-500/20 to-blue-600/25 opacity-70 blur-xl dark:from-blue-400/20 dark:via-cyan-300/15 dark:to-blue-400/20" />
           </div>
 
           {/* CTAs */}
           <div className="flex animate-in flex-col items-center justify-center gap-4 delay-400 duration-700 fade-in slide-in-from-bottom-4 sm:flex-row">
-            <Button
-              size="lg"
-              className="h-12 gap-2 bg-blue-600 px-8 text-base font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
-            >
-              <Link href="/chat" className="flex items-center gap-2">
+            <SignUpButton>
+              <Button
+                size="lg"
+                className="h-12 gap-2 bg-blue-600 px-8 text-base font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
+              >
                 <MessageSquare className="h-5 w-5" />
                 Começar Grátis
-              </Link>
-            </Button>
+              </Button>
+            </SignUpButton>
 
             <Button
               size="lg"
               variant="outline"
               className="group h-12 gap-2 border-slate-300 bg-white px-8 text-base font-semibold text-slate-900 shadow-sm hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
             >
-              <Link href="#how-it-works" className="flex items-center gap-2">
+              <Link className="flex items-center gap-2" href="#how-it-works">
                 Ver como funciona
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
@@ -219,12 +224,9 @@ export default function HeroLandingUi() {
                   />
                 ))}
               </div>
-
               <span className="text-sm font-medium">+2.000 profissionais</span>
             </div>
-
             <div className="hidden h-4 w-px bg-slate-300 sm:block dark:bg-slate-700" />
-
             <div className="flex items-center gap-2">
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -237,18 +239,14 @@ export default function HeroLandingUi() {
                   </svg>
                 ))}
               </div>
-
               <span className="text-sm font-medium">4.9/5 avaliação</span>
             </div>
-
             <div className="hidden h-4 w-px bg-slate-300 sm:block dark:bg-slate-700" />
-
             <span className="text-sm font-medium">Sem cartão de crédito</span>
           </div>
         </div>
       </div>
 
-      {/* Animation Keyframes */}
       <style jsx>{`
         @keyframes float {
           0%,
@@ -259,7 +257,6 @@ export default function HeroLandingUi() {
             transform: translateY(-20px) rotate(5deg);
           }
         }
-
         @keyframes gradient {
           0% {
             background-position: 0% 50%;
@@ -271,7 +268,6 @@ export default function HeroLandingUi() {
             background-position: 0% 50%;
           }
         }
-
         .animate-gradient {
           animation: gradient 4s ease infinite;
         }

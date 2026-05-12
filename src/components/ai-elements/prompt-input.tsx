@@ -424,12 +424,9 @@ export const PromptInputActionAddAttachments = ({
 }: PromptInputActionAddAttachmentsProps) => {
   const { openFileDialog } = usePromptInputAttachments()
 
-  const handleClick = useCallback(
-    () => {
-      openFileDialog()
-    },
-    [openFileDialog]
-  )
+  const handleClick = useCallback(() => {
+    openFileDialog()
+  }, [openFileDialog])
 
   return (
     <DropdownMenuItem {...props} closeOnClick={false} onClick={handleClick}>
@@ -937,7 +934,7 @@ export const PromptInputTextarea = ({
   onChange,
   onKeyDown,
   className,
-  placeholder = "Peça algo como \"Me mostre gráficos de vendas do último trimestre\" ou \"Resuma o conteúdo deste PDF\"",
+  placeholder = 'Peça algo como "Me mostre gráficos de vendas do último trimestre" ou "Resuma o conteúdo deste PDF"',
   ...props
 }: PromptInputTextareaProps) => {
   const controller = useOptionalPromptInputController()
@@ -1071,7 +1068,10 @@ export const PromptInputTools = ({
   className,
   ...props
 }: PromptInputToolsProps) => (
-  <div className={cn("flex min-w-0 items-center gap-1", className)} {...props} />
+  <div
+    className={cn("flex min-w-0 items-center gap-1", className)}
+    {...props}
+  />
 )
 
 // ============================================================================

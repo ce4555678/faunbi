@@ -13,7 +13,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { SignUpButton } from "@clerk/nextjs"
 
 const modules = [
   {
@@ -302,12 +302,12 @@ export default function ModulesLandingUi() {
 
               {/* CTA */}
               <div className="mt-8 border-t border-border/50 pt-6">
-                <Button className="gap-2">
-                  <Link href="/chat" className="flex items-center gap-2">
+                <SignUpButton>
+                  <Button className="gap-2">
                     Experimentar {activeModule.name}
                     <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+                  </Button>
+                </SignUpButton>
               </div>
             </div>
           </div>

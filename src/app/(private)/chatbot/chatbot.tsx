@@ -40,10 +40,7 @@ import {
 } from "@/components/ai-elements/reasoning"
 import { Spinner } from "@/components/ui/spinner"
 import { Button } from "@/components/ui/button"
-import {
-  PlusIcon,
-  SparklesIcon,
-} from "lucide-react"
+import { PlusIcon, SparklesIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const PromptInputAttachmentsDisplay = () => {
@@ -111,7 +108,8 @@ const ChatBot = () => {
               Conversa
             </h2>
             <p className="hidden text-xs text-muted-foreground sm:block">
-              Use o assistente para analisar arquivos, resumir conteúdos e tirar dúvidas.
+              Use o assistente para analisar arquivos, resumir conteúdos e tirar
+              dúvidas.
             </p>
           </div>
 
@@ -146,7 +144,8 @@ const ChatBot = () => {
                       </h1>
 
                       <p className="text-sm leading-6 text-muted-foreground">
-                        Envie uma pergunta, anexe um arquivo ou peça para o assistente organizar suas informações.
+                        Envie uma pergunta, anexe um arquivo ou peça para o
+                        assistente organizar suas informações.
                       </p>
                     </div>
 

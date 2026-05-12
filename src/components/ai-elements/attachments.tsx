@@ -94,7 +94,9 @@ const renderAttachmentImage = (
   return (
     <Image
       alt={filename || "Image"}
-      className={isGrid ? "size-full object-cover" : "size-full rounded object-cover"}
+      className={
+        isGrid ? "size-full object-cover" : "size-full rounded object-cover"
+      }
       height={isGrid ? 96 : 20}
       src={url}
       width={isGrid ? 96 : 20}
@@ -365,9 +367,9 @@ export const AttachmentRemove = ({
 
 export type AttachmentHoverCardProps = ComponentProps<typeof HoverCard>
 
-export const AttachmentHoverCard = (
-  props: AttachmentHoverCardProps
-) => <HoverCard {...props} />
+export const AttachmentHoverCard = (props: AttachmentHoverCardProps) => (
+  <HoverCard {...props} />
+)
 
 export type AttachmentHoverCardTriggerProps = ComponentProps<
   typeof HoverCardTrigger

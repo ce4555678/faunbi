@@ -34,7 +34,7 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel className="px-2 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+      <SidebarGroupLabel className="px-2 text-[11px] font-medium tracking-wider text-muted-foreground uppercase">
         Principal
       </SidebarGroupLabel>
 
