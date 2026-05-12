@@ -420,16 +420,16 @@ export const PromptInputActionAddAttachments = ({
 }: PromptInputActionAddAttachmentsProps) => {
   const { openFileDialog } = usePromptInputAttachments()
 
-const handleSelect = useCallback(
-  (e: BaseUIEvent<React.SyntheticEvent<HTMLDivElement, Event>>) => {
-    e.preventDefault()
-    openFileDialog()
-  },
-  [openFileDialog]
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.preventDefault()
+      openFileDialog()
+    },
+    [openFileDialog]
   )
 
   return (
-    <DropdownMenuItem {...props}  onSelect={handleSelect}>
+    <DropdownMenuItem {...props} onClick={handleClick}>
       <ImageIcon className="mr-2 size-4" /> {label}
     </DropdownMenuItem>
   )
@@ -952,7 +952,7 @@ export const PromptInputTextarea = ({
   onChange,
   onKeyDown,
   className,
-  placeholder = "Peça algo como \"Me mostre gráficos de vendas do último trimestre\" ou \"Resuma o conteúdo deste PDF\"",
+  placeholder = 'Peça algo como "Me mostre gráficos de vendas do último trimestre" ou "Resuma o conteúdo deste PDF"',
   ...props
 }: PromptInputTextareaProps) => {
   const controller = useOptionalPromptInputController()
