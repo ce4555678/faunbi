@@ -41,11 +41,9 @@ import {
 import { Spinner } from "@/components/ui/spinner"
 import { Button } from "@/components/ui/button"
 import {
-  BadgePlusIcon,
+
   MessageCircle,
-  MessageSquareIcon,
-  MessageSquareMore,
-  MessageSquareMoreIcon,
+
 } from "lucide-react"
 
 const PromptInputAttachmentsDisplay = () => {
@@ -102,12 +100,13 @@ const ChatBot = () => {
       <div className="flex h-full flex-col">
         <div className="flex items-center justify-end-safe pb-3">
           <Button
-            className={"flex items-center gap-2 "}
+            className={"flex items-center gap-2"}
             onClick={() => {
               setMessages([])
               setText("")
             }}
             variant={"outline"}
+            disabled={messages.length === 0}
           >
             <MessageCircle className="size-4" />
             Nova conversar
