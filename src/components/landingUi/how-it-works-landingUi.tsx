@@ -55,7 +55,11 @@ const steps = [
 ]
 
 const useCases = [
-  { icon: Calendar, label: "Agenda", color: "text-blue-600 dark:text-blue-300" },
+  {
+    icon: Calendar,
+    label: "Agenda",
+    color: "text-blue-600 dark:text-blue-300",
+  },
   {
     icon: FileText,
     label: "Orçamentos",
@@ -252,7 +256,7 @@ export default function HowItWorksLandingUi() {
                     </div>
                   </div>
 
-                  <span className="hidden rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 sm:inline-flex">
+                  <span className="hidden rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 sm:inline-flex dark:bg-emerald-950/40 dark:text-emerald-300">
                     Online
                   </span>
                 </div>
@@ -335,7 +339,7 @@ export default function HowItWorksLandingUi() {
             </div>
 
             {/* Floating badge */}
-            <div className="absolute -bottom-5 left-1/2 hidden -translate-x-1/2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 shadow-xl shadow-slate-950/10 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300 sm:flex">
+            <div className="absolute -bottom-5 left-1/2 hidden -translate-x-1/2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 shadow-xl shadow-slate-950/10 sm:flex dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300">
               <span className="mr-2 h-2 w-2 rounded-full bg-emerald-500" />
               Ação pronta para confirmação
             </div>

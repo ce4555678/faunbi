@@ -19,7 +19,7 @@ const LandingUi = {
   faq: FAQLandingUi,
   cta: CTALandingUi,
   header: HeaderLandingUi,
-  footer: FooterLandingUi
+  footer: FooterLandingUi,
 }
 
 export default LandingUi

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, MessageSquare, Sparkles, ArrowRight } from "lucide-react"
+import { Menu, X, MessageSquare, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
@@ -54,20 +54,26 @@ export function HeaderLandingUi() {
               <div className="absolute inset-0 bg-linear-to-br from-white/20 via-transparent to-transparent" />
               <div className="absolute -inset-4 bg-blue-300/30 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
             </div> */}
-            <Image className="h-9 w-9" src="/faunbi.svg" alt="Logo" width={40} height={40} />
+            <Image
+              className="h-9 w-9"
+              src="/faunbi.svg"
+              alt="Logo"
+              width={40}
+              height={40}
+            />
 
             <div className="flex flex-col leading-none">
               <span className="text-xl font-black tracking-tight text-slate-950 dark:text-white">
                 faunbi
               </span>
-              <span className="hidden text-[10px] font-semibold uppercase tracking-[0.22em] text-blue-600 dark:text-blue-300 sm:block">
+              <span className="hidden text-[10px] font-semibold tracking-[0.22em] text-blue-600 uppercase sm:block dark:text-blue-300">
                 AI Business
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center rounded-full border border-slate-200/80 bg-white/70 p-1 shadow-sm backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/60 md:flex">
+          <div className="hidden items-center rounded-full border border-slate-200/80 bg-white/70 p-1 shadow-sm backdrop-blur-xl md:flex dark:border-slate-800 dark:bg-slate-900/60">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -84,7 +90,6 @@ export function HeaderLandingUi() {
             <Button
               variant="ghost"
               size="sm"
-              
               className="font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
             >
               <Link href="/login">Entrar</Link>
@@ -92,7 +97,6 @@ export function HeaderLandingUi() {
 
             <Button
               size="sm"
-              
               className="group h-10 rounded-full bg-blue-600 px-5 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
             >
               <Link className="flex items-center gap-2" href="/chat">
@@ -108,7 +112,7 @@ export function HeaderLandingUi() {
             type="button"
             variant="ghost"
             size="icon"
-            className="h-10 w-10 rounded-full border border-slate-200 bg-white/80 text-slate-900 shadow-sm backdrop-blur-xl hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900/80 dark:text-white dark:hover:bg-slate-800 md:hidden"
+            className="h-10 w-10 rounded-full border border-slate-200 bg-white/80 text-slate-900 shadow-sm backdrop-blur-xl hover:bg-slate-100 md:hidden dark:border-slate-800 dark:bg-slate-900/80 dark:text-white dark:hover:bg-slate-800"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={isMobileMenuOpen}
@@ -149,7 +153,6 @@ export function HeaderLandingUi() {
                 <div className="grid gap-2">
                   <Button
                     variant="outline"
-                    
                     className="h-11 rounded-2xl border-slate-300 bg-white font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
                   >
                     <Link
@@ -160,10 +163,7 @@ export function HeaderLandingUi() {
                     </Link>
                   </Button>
 
-                  <Button
-                    
-                    className="h-11 rounded-2xl bg-blue-600 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
-                  >
+                  <Button className="h-11 rounded-2xl bg-blue-600 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400">
                     <Link
                       href="/chat"
                       className="flex items-center justify-center gap-2"

@@ -126,7 +126,7 @@ export default function FeaturesLandingUi() {
                 "group relative overflow-hidden rounded-3xl border transition-all duration-300",
                 "hover:-translate-y-1 hover:shadow-2xl",
                 feature.highlight
-                  ? "border-blue-500/25 bg-blue-600 p-7 text-white shadow-2xl shadow-blue-600/25 dark:border-blue-400/20 dark:bg-blue-500/95 lg:col-span-2 lg:row-span-2 lg:min-h-107.5"
+                  ? "border-blue-500/25 bg-blue-600 p-7 text-white shadow-2xl shadow-blue-600/25 lg:col-span-2 lg:row-span-2 lg:min-h-107.5 dark:border-blue-400/20 dark:bg-blue-500/95"
                   : "border-slate-200 bg-white/80 p-6 shadow-sm shadow-slate-950/5 backdrop-blur-xl hover:border-blue-500/30 hover:shadow-blue-950/10 dark:border-slate-800 dark:bg-slate-950/70 dark:hover:border-blue-400/30 dark:hover:shadow-blue-500/10"
               )}
               style={{

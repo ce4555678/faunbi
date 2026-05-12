@@ -66,7 +66,6 @@ export function CTALandingUi() {
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button
                 size="lg"
-                
                 className="group h-14 rounded-full bg-blue-600 px-9 text-base font-bold text-white shadow-xl shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-blue-600/35 sm:text-lg dark:bg-blue-500 dark:hover:bg-blue-400"
               >
                 <Link href="/chat" className="flex items-center gap-2">
@@ -79,7 +78,6 @@ export function CTALandingUi() {
               <Button
                 size="lg"
                 variant="outline"
-                
                 className="group h-14 rounded-full border-slate-300 bg-white px-8 text-base font-bold text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-slate-100 sm:text-lg dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
               >
                 <Link href="#pricing" className="flex items-center gap-2">

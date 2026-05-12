@@ -1,9 +1,9 @@
 import { Geist_Mono, Roboto, Inter } from "next/font/google"
-import { ClerkProvider,} from '@clerk/nextjs'
+import { ClerkProvider } from "@clerk/nextjs"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import { ptBR } from '@clerk/localizations';
+import { ptBR } from "@clerk/localizations"
 
 const interHeading = Inter({ subsets: ["latin"], variable: "--font-heading" })
 
@@ -121,9 +121,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <ClerkProvider localization={ptBR}>
-            {children}
-          </ClerkProvider>
+          <ClerkProvider localization={ptBR}>{children}</ClerkProvider>
         </ThemeProvider>
       </body>
     </html>

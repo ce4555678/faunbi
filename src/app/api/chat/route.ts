@@ -1,10 +1,11 @@
 import { streamText, UIMessage, convertToModelMessages } from "ai"
+import { google } from '@ai-sdk/google';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json()
 
   const result = streamText({
-    model: "google/gemma-4-26b-a4b-it",
+    model: google('gemini-3.1-flash-lite'),
     messages: await convertToModelMessages(messages),
   })
 

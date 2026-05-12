@@ -165,10 +165,14 @@ export function PricingLandingUi() {
                 variant={plan.variant}
                 className={cn(
                   "w-full gap-2",
-                  plan.popular && "shadow-lg shadow-primary/20"
+                  plan.popular &&
+                    "flex items-center shadow-lg shadow-primary/20"
                 )}
               >
-                <Link href={plan.name === "Premium" ? "/contact" : "/chat"}>
+                <Link
+                  className="flex items-center gap-2"
+                  href={plan.name === "Premium" ? "/contact" : "/chat"}
+                >
                   {plan.popular && <Zap className="h-4 w-4" />}
                   {plan.cta}
                 </Link>

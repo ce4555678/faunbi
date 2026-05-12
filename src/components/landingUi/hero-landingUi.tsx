@@ -36,40 +36,40 @@ export default function HeroLandingUi() {
   const [displayText, setDisplayText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
 
-useEffect(() => {
-  const example = typingExamples[currentExample]
+  useEffect(() => {
+    const example = typingExamples[currentExample]
 
-  if (isTyping) {
-    if (displayText.length < example.length) {
+    if (isTyping) {
+      if (displayText.length < example.length) {
+        const timeout = window.setTimeout(() => {
+          setDisplayText(example.slice(0, displayText.length + 1))
+        }, 50)
+
+        return () => window.clearTimeout(timeout)
+      }
+
       const timeout = window.setTimeout(() => {
-        setDisplayText(example.slice(0, displayText.length + 1))
-      }, 50)
+        setIsTyping(false)
+      }, 2000)
+
+      return () => window.clearTimeout(timeout)
+    }
+
+    if (displayText.length > 0) {
+      const timeout = window.setTimeout(() => {
+        setDisplayText(displayText.slice(0, -1))
+      }, 30)
 
       return () => window.clearTimeout(timeout)
     }
 
     const timeout = window.setTimeout(() => {
-      setIsTyping(false)
-    }, 2000)
+      setCurrentExample((prev) => (prev + 1) % typingExamples.length)
+      setIsTyping(true)
+    }, 300)
 
     return () => window.clearTimeout(timeout)
-  }
-
-  if (displayText.length > 0) {
-    const timeout = window.setTimeout(() => {
-      setDisplayText(displayText.slice(0, -1))
-    }, 30)
-
-    return () => window.clearTimeout(timeout)
-  }
-
-  const timeout = window.setTimeout(() => {
-    setCurrentExample((prev) => (prev + 1) % typingExamples.length)
-    setIsTyping(true)
-  }, 300)
-
-  return () => window.clearTimeout(timeout)
-}, [displayText, isTyping, currentExample])
+  }, [displayText, isTyping, currentExample])
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background pt-16 text-foreground">

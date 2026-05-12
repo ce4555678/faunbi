@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Sparkles} from "lucide-react"
+import { Sparkles } from "lucide-react"
 
 const footerLinks = {
   produto: [
@@ -31,14 +31,14 @@ const footerLinks = {
 }
 
 const socialLinks: {
-    icon: React.ElementType;
-    href: string;
-    label: string;
+  icon: React.ElementType
+  href: string
+  label: string
 }[] = [
-//   { icon: Twitter, href: "https://twitter.com/faunbi", label: "Twitter" },
-//   { icon: Instagram, href: "https://instagram.com/faunbi", label: "Instagram" },
-//   { icon: Linkedin, href: "https://linkedin.com/company/faunbi", label: "LinkedIn" },
-//   { icon: Youtube, href: "https://youtube.com/@faunbi", label: "YouTube" },
+  //   { icon: Twitter, href: "https://twitter.com/faunbi", label: "Twitter" },
+  //   { icon: Instagram, href: "https://instagram.com/faunbi", label: "Instagram" },
+  //   { icon: Linkedin, href: "https://linkedin.com/company/faunbi", label: "LinkedIn" },
+  //   { icon: Youtube, href: "https://youtube.com/@faunbi", label: "YouTube" },
 ]
 
 export default function FooterLandingUi() {
@@ -47,18 +47,18 @@ export default function FooterLandingUi() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
         <div className="py-12 md:py-16">
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-8 lg:gap-12">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-6 lg:gap-12">
             {/* Brand Column */}
             <div className="col-span-2">
-              <Link href="/" className="flex items-center gap-2 mb-4">
+              <Link href="/" className="mb-4 flex items-center gap-2">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10">
                   <Sparkles className="h-5 w-5 text-primary" />
                 </div>
                 <span className="text-xl font-bold tracking-tight">faunbi</span>
               </Link>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-xs">
-                A plataforma de gestão por conversa para profissionais autônomos. 
-                Simplifique seu negócio com IA.
+              <p className="mb-6 max-w-xs text-sm leading-relaxed text-muted-foreground">
+                A plataforma de gestão por conversa para profissionais
+                autônomos. Simplifique seu negócio com IA.
               </p>
               {/* Social Links */}
               <div className="flex gap-3">
@@ -68,7 +68,7 @@ export default function FooterLandingUi() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
                     aria-label={social.label}
                   >
                     <social.icon className="h-4 w-4" />
@@ -79,13 +79,13 @@ export default function FooterLandingUi() {
 
             {/* Link Columns */}
             <div>
-              <h4 className="font-semibold mb-4">Produto</h4>
+              <h4 className="mb-4 font-semibold">Produto</h4>
               <ul className="space-y-3">
                 {footerLinks.produto.map((link) => (
                   <li key={link.label}>
-                    <Link 
+                    <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {link.label}
                     </Link>
@@ -95,13 +95,13 @@ export default function FooterLandingUi() {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Empresa</h4>
+              <h4 className="mb-4 font-semibold">Empresa</h4>
               <ul className="space-y-3">
                 {footerLinks.empresa.map((link) => (
                   <li key={link.label}>
-                    <Link 
+                    <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {link.label}
                     </Link>
@@ -111,13 +111,13 @@ export default function FooterLandingUi() {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Legal</h4>
+              <h4 className="mb-4 font-semibold">Legal</h4>
               <ul className="space-y-3">
                 {footerLinks.legal.map((link) => (
                   <li key={link.label}>
-                    <Link 
+                    <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {link.label}
                     </Link>
@@ -127,13 +127,13 @@ export default function FooterLandingUi() {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Suporte</h4>
+              <h4 className="mb-4 font-semibold">Suporte</h4>
               <ul className="space-y-3">
                 {footerLinks.suporte.map((link) => (
                   <li key={link.label}>
-                    <Link 
+                    <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {link.label}
                     </Link>
@@ -145,7 +145,7 @@ export default function FooterLandingUi() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-border py-6 sm:flex-row">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Faunbi. Todos os direitos reservados.
           </p>
