@@ -4,8 +4,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { ptBR } from "@clerk/localizations"
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
-
+import { NuqsAdapter } from "nuqs/adapters/next/app"
+import { TooltipProvider } from "@/components/ui/tooltip"
 const interHeading = Inter({ subsets: ["latin"], variable: "--font-heading" })
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" })
@@ -124,7 +124,7 @@ export default function RootLayout({
         <ThemeProvider>
           <ClerkProvider localization={ptBR}>
             <NuqsAdapter>
-              {children}
+              <TooltipProvider>{children}</TooltipProvider>
             </NuqsAdapter>
           </ClerkProvider>
         </ThemeProvider>

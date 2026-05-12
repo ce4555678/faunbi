@@ -1,13 +1,13 @@
-import { SignIn } from '@clerk/nextjs'
+import { SignIn } from "@clerk/nextjs"
 
 export const metadata = {
-  title: 'Entrar',
+  title: "Entrar",
 }
 
 export default function SignInPage() {
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <SignIn  />
+      <SignIn />
     </div>
   )
 }

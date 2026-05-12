@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, MessageSquare, ArrowRight } from "lucide-react"
+import { Menu, X, MessageSquare, ArrowRight, LogInIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
@@ -49,11 +49,6 @@ export function HeaderLandingUi() {
         >
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3">
-            {/* <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl border border-blue-500/20 bg-blue-600 text-white shadow-lg shadow-blue-600/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-blue-600/30 dark:border-blue-400/20 dark:bg-blue-500">
-              <Sparkles className="relative z-10 h-5 w-5" />
-              <div className="absolute inset-0 bg-linear-to-br from-white/20 via-transparent to-transparent" />
-              <div className="absolute -inset-4 bg-blue-300/30 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
-            </div> */}
             <Image
               className="h-9 w-9"
               src="/faunbi.svg"
@@ -92,7 +87,7 @@ export function HeaderLandingUi() {
               size="sm"
               className="font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
             >
-              <Link href="/login">Entrar</Link>
+              <Link href="/sign-in">Entrar</Link>
             </Button>
 
             <Button
