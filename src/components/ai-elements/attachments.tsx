@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/hover-card"
 import { cn } from "@/lib/utils"
 import type { FileUIPart, SourceDocumentUIPart } from "ai"
+import Image from "next/image"
 import {
   FileTextIcon,
   GlobeIcon,
@@ -89,24 +90,17 @@ const renderAttachmentImage = (
   url: string,
   filename: string | undefined,
   isGrid: boolean
-) =>
-  isGrid ? (
-    <img
+) => {
+  return (
+    <Image
       alt={filename || "Image"}
-      className="size-full object-cover"
-      height={96}
+      className={isGrid ? "size-full object-cover" : "size-full rounded object-cover"}
+      height={isGrid ? 96 : 20}
       src={url}
-      width={96}
-    />
-  ) : (
-    <img
-      alt={filename || "Image"}
-      className="size-full rounded object-cover"
-      height={20}
-      src={url}
-      width={20}
+      width={isGrid ? 96 : 20}
     />
   )
+}
 
 // ============================================================================
 // Contexts

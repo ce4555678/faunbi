@@ -31,7 +31,7 @@ export interface TextShimmerProps {
   spread?: number
 }
 
-const ShimmerComponent = ({
+const ShimmerComponent = memo(({
   children,
   as: Component = "p",
   className,
@@ -72,6 +72,8 @@ const ShimmerComponent = ({
       {children}
     </MotionComponent>
   )
-}
+})
+
+ShimmerComponent.displayName = "ShimmerComponent"
 
 export const Shimmer = memo(ShimmerComponent)
