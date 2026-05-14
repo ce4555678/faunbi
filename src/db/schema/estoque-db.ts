@@ -8,14 +8,19 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core"
 import { nanoid } from "nanoid"
+import { userDb } from "./user-db"
+import { relations } from "drizzle-orm"
 
-export const stockItemsDb = pgTable(
-  "stock_items",
+export const estoqueDb = pgTable(
+  "estoque",
   {
     id: text("id")
       .primaryKey()
       .$defaultFn(() => nanoid()),
-    userId: text("user_id").notNull(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => userDb.id, { onDelete: "cascade" }),
+    image: text("image"),
 
     name: text("name").notNull(),
     description: text("description"),
@@ -38,8 +43,15 @@ export const stockItemsDb = pgTable(
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (t) => [
-    index("stock_items_user_id_idx").on(t.userId),
-    index("stock_items_name_idx").on(t.name),
-    uniqueIndex("stock_items_user_sku_idx").on(t.userId, t.sku),
+    index("estoque_user_id_idx").on(t.userId),
+    index("estoque_name_idx").on(t.name),
+    uniqueIndex("estoque_user_sku_idx").on(t.userId, t.sku),
   ]
 )
+
+export const estoqueRelations = relations(estoqueDb, ({ one }) => ({
+  user: one(userDb, {
+    fields: [estoqueDb.userId],
+    references: [userDb.id],
+  }),
+}))

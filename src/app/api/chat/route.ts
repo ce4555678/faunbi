@@ -1,11 +1,11 @@
 import { streamText, UIMessage, convertToModelMessages } from "ai"
 import { google, GoogleLanguageModelOptions } from "@ai-sdk/google"
-import { groq, GroqLanguageModelOptions } from '@ai-sdk/groq';
+import { groq, GroqLanguageModelOptions } from "@ai-sdk/groq"
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json()
- 
+
   let isFile = false
-for (const message of messages) {
+  for (const message of messages) {
     if (message.role !== "user") continue
 
     for (const part of message.parts) {
@@ -17,7 +17,7 @@ for (const message of messages) {
         } else if (mediaType === "application/pdf") {
           isFile = true
         } else if (mediaType.startsWith("audio/")) {
-         isFile = true
+          isFile = true
         }
       }
     }
@@ -117,12 +117,11 @@ Você deve parecer um funcionário administrativo inteligente, não um chatbot g
           thinkingLevel: "minimal",
         },
       } satisfies GoogleLanguageModelOptions,
-       groq: {
-        
-      reasoningFormat: 'parsed',
-      reasoningEffort: 'low',
-      parallelToolCalls: true, // Enable parallel function calling (default: true)
-    } satisfies GroqLanguageModelOptions,
+      groq: {
+        reasoningFormat: "parsed",
+        reasoningEffort: "low",
+        parallelToolCalls: true, // Enable parallel function calling (default: true)
+      } satisfies GroqLanguageModelOptions,
     },
   })
 

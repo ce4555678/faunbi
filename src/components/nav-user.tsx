@@ -16,7 +16,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { useUser } from "@clerk/nextjs"
+import useSessionStore from "@/store/session.store"
 import {
   BadgeCheckIcon,
   BellIcon,
@@ -28,15 +28,15 @@ import {
 
 export function NavUser() {
   const { isMobile } = useSidebar()
-  const { user } = useUser()
+  const {session} = useSessionStore()
   const fallback =
-    user?.fullName &&
-    user.fullName
-      .split(" ")
-      .map((name) => name[0])
-      .join("")
-      .slice(0, 2)
-      .toUpperCase()
+      session?.name &&
+      session.name
+        .split(" ")
+        .map((name) => name[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase()
 
   return (
     <SidebarMenu>
@@ -52,8 +52,8 @@ export function NavUser() {
           >
             <Avatar className="size-8 rounded-lg">
               <AvatarImage
-                src={user?.imageUrl}
-                alt={user?.fullName || "User"}
+                src={session?.image}
+                alt={session?.name || "User"}
               />
               <AvatarFallback className="rounded-lg text-xs">
                 {fallback}
@@ -61,9 +61,9 @@ export function NavUser() {
             </Avatar>
 
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">{user?.fullName}</span>
+              <span className="truncate font-medium">{session?.name}</span>
               <span className="truncate text-xs text-muted-foreground">
-                {user?.emailAddresses?.[0]?.emailAddress}
+                {session?.email}
               </span>
             </div>
 
@@ -81,8 +81,8 @@ export function NavUser() {
                 <div className="flex items-center gap-2 px-2 py-2 text-left text-sm">
                   <Avatar className="size-8 rounded-lg">
                     <AvatarImage
-                      src={user?.imageUrl}
-                      alt={user?.fullName || "User"}
+                      src={session?.image}
+                      alt={session?.name || "User"}
                     />
                     <AvatarFallback className="rounded-lg text-xs">
                       {fallback}
@@ -91,10 +91,10 @@ export function NavUser() {
 
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">
-                      {user?.fullName}
+                      {session?.name}
                     </span>
                     <span className="truncate text-xs text-muted-foreground">
-                      {user?.emailAddresses?.[0]?.emailAddress}
+                      {session?.email}
                     </span>
                   </div>
                 </div>

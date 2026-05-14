@@ -1,11 +1,11 @@
 import { Geist_Mono, Roboto, Inter } from "next/font/google"
-import { ClerkProvider } from "@clerk/nextjs"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import { ptBR } from "@clerk/localizations"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { Toaster } from "@/components/ui/sonner"
+
 const interHeading = Inter({ subsets: ["latin"], variable: "--font-heading" })
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" })
@@ -15,7 +15,12 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
+import Providers from "./providers"
+
+export const viewport: Viewport = {
+  themeColor: "#FFFFFF",
+}
 
 export const metadata: Metadata = {
   title: {
@@ -111,6 +116,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
+      dir="ltr"
       suppressHydrationWarning
       className={cn(
         "antialiased",
@@ -122,11 +128,12 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <ClerkProvider localization={ptBR}>
-            <NuqsAdapter>
-              <TooltipProvider>{children}</TooltipProvider>
-            </NuqsAdapter>
-          </ClerkProvider>
+          <NuqsAdapter>
+            <TooltipProvider>
+              <Providers>{children}</Providers>
+              <Toaster  richColors/>
+            </TooltipProvider>
+          </NuqsAdapter>
         </ThemeProvider>
       </body>
     </html>

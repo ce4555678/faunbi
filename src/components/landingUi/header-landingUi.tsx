@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Menu, X, MessageSquare, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
-import { SignUpButton } from "@clerk/nextjs"
 
 const navLinks = [
   { href: "#features", label: "Funcionalidades" },
@@ -88,9 +87,9 @@ export function HeaderLandingUi() {
               size="sm"
               className="font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
             >
-              <Link href="/sign-in">Entrar</Link>
+              <Link href="/auth/login">Entrar</Link>
             </Button>
-            <SignUpButton>
+            <Link className="flex items-center gap-2" href="/auth/sign-up">
               <Button
                 size="sm"
                 className="group h-10 rounded-full bg-blue-600 px-5 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
@@ -99,7 +98,7 @@ export function HeaderLandingUi() {
                 Começar Grátis
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Button>
-            </SignUpButton>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}

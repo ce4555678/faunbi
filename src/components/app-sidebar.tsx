@@ -140,7 +140,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border/70 p-2">
-        <NavUser/>
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   )

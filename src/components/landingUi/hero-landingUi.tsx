@@ -14,7 +14,6 @@ import {
   Send,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { SignUpButton } from "@clerk/nextjs"
 
 const typingExamples = [
   "Agendar corte para Maria às 15h amanhã",
@@ -191,7 +190,7 @@ export default function HeroLandingUi() {
 
           {/* CTAs */}
           <div className="flex animate-in flex-col items-center justify-center gap-4 delay-400 duration-700 fade-in slide-in-from-bottom-4 sm:flex-row">
-            <SignUpButton>
+            <Link href="/auth/sign-up" className="flex items-center gap-2">
               <Button
                 size="lg"
                 className="h-12 gap-2 bg-blue-600 px-8 text-base font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
@@ -199,7 +198,7 @@ export default function HeroLandingUi() {
                 <MessageSquare className="h-5 w-5" />
                 Começar Grátis
               </Button>
-            </SignUpButton>
+            </Link>
 
             <Button
               size="lg"

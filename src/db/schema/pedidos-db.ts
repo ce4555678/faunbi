@@ -9,6 +9,8 @@ import {
 } from "drizzle-orm/pg-core"
 import { nanoid } from "nanoid"
 import { clientsDb } from "./clientes-db"
+import { userDb } from "./user-db"
+import { relations } from "drizzle-orm"
 
 export const orderStatusEnum = pgEnum("order_status", [
   "pending",
@@ -17,13 +19,15 @@ export const orderStatusEnum = pgEnum("order_status", [
   "cancelled",
 ])
 
-export const orders = pgTable(
-  "orders",
+export const pedidosDb = pgTable(
+  "pedidos",
   {
     id: text("id")
       .primaryKey()
       .$defaultFn(() => nanoid()),
-    userId: text("user_id").notNull(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => userDb.id, { onDelete: "cascade" }),
     clientId: text("client_id")
       .notNull()
       .references(() => clientsDb.id, { onDelete: "restrict" }),
@@ -43,9 +47,15 @@ export const orders = pgTable(
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (t) => [
-    index("orders_user_id_idx").on(t.userId),
-    index("orders_client_id_idx").on(t.clientId),
-    index("orders_status_idx").on(t.status),
-    index("orders_due_date_idx").on(t.dueDate),
+    index("pedidos_client_id_idx").on(t.clientId),
+    index("pedidos_status_idx").on(t.status),
+    index("pedidos_due_date_idx").on(t.dueDate),
   ]
 )
+
+export const pedidosRelations = relations(pedidosDb, ({ one }) => ({
+  user: one(userDb, {
+    fields: [pedidosDb.userId],
+    references: [userDb.id],
+  }),
+}))

@@ -11,7 +11,6 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react"
-import { SignUpButton } from "@clerk/nextjs"
 
 export function CTALandingUi() {
   return (
@@ -47,7 +46,7 @@ export function CTALandingUi() {
                 alt="Faunbi"
                 width={76}
                 height={76}
-                className="h-full w-full object-contain "
+                className="h-full w-full object-contain"
                 priority
               />
             </div>
@@ -73,16 +72,16 @@ export function CTALandingUi() {
 
             {/* CTAs */}
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <SignUpButton>
+              <Link href="/auth/sign-up" className="flex items-center gap-2">
                 <Button
                   size="lg"
                   className="group h-14 w-full rounded-full bg-blue-600 px-8 text-base font-bold text-white shadow-xl shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-blue-600/35 sm:w-auto sm:text-lg dark:bg-blue-500 dark:hover:bg-blue-400"
                 >
-                    <MessageSquare className="h-5 w-5" />
-                    Começar grátis
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <MessageSquare className="h-5 w-5" />
+                  Começar grátis
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
-              </SignUpButton>
+              </Link>
 
               <Button
                 size="lg"

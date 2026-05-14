@@ -22,6 +22,13 @@
       "when": 1778544976544,
       "tag": "0002_mixed_amazoness",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1778792823857,
+      "tag": "0003_high_kat_farrell",
+      "breakpoints": true
     }
   ]
 }
