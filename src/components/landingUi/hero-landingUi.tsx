@@ -114,7 +114,7 @@ export default function HeroLandingUi() {
               alt="Faunbi Logo"
               width={16}
               height={16}
-              className="h-4 w-4"
+              className="size-5"
             />
             <span className="text-sm font-semibold text-blue-700 dark:text-blue-200">
               Gestão por IA Conversacional

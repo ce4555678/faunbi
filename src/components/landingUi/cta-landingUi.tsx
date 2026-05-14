@@ -45,9 +45,9 @@ export function CTALandingUi() {
               <Image
                 src="/faunbi.svg"
                 alt="Faunbi"
-                width={64}
-                height={64}
-                className="h-full w-full object-contain"
+                width={76}
+                height={76}
+                className="h-full w-full object-contain "
                 priority
               />
             </div>
@@ -78,14 +78,9 @@ export function CTALandingUi() {
                   size="lg"
                   className="group h-14 w-full rounded-full bg-blue-600 px-8 text-base font-bold text-white shadow-xl shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-blue-600/35 sm:w-auto sm:text-lg dark:bg-blue-500 dark:hover:bg-blue-400"
                 >
-                  <Link
-                    href="/chat"
-                    className="flex items-center justify-center gap-2"
-                  >
                     <MessageSquare className="h-5 w-5" />
                     Começar grátis
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
                 </Button>
               </SignUpButton>
 

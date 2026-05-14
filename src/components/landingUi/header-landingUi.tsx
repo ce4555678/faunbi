@@ -51,7 +51,7 @@ export function HeaderLandingUi() {
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3">
             <Image
-              className="h-9 w-9"
+              className="size-10"
               src="/faunbi.svg"
               alt="Logo"
               width={40}
@@ -60,7 +60,7 @@ export function HeaderLandingUi() {
 
             <div className="flex flex-col leading-none">
               <span className="text-xl font-black tracking-tight text-slate-950 dark:text-white">
-                faunbi
+                Faunbi
               </span>
               <span className="hidden text-[10px] font-semibold tracking-[0.22em] text-blue-600 uppercase sm:block dark:text-blue-300">
                 AI Business

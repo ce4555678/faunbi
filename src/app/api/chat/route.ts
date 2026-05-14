@@ -1,11 +1,30 @@
 import { streamText, UIMessage, convertToModelMessages } from "ai"
 import { google, GoogleLanguageModelOptions } from "@ai-sdk/google"
-
+import { groq, GroqLanguageModelOptions } from '@ai-sdk/groq';
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json()
+ 
+  let isFile = false
+for (const message of messages) {
+    if (message.role !== "user") continue
+
+    for (const part of message.parts) {
+      if (part.type === "file") {
+        const { mediaType } = part
+
+        if (mediaType.startsWith("image/")) {
+          isFile = true
+        } else if (mediaType === "application/pdf") {
+          isFile = true
+        } else if (mediaType.startsWith("audio/")) {
+         isFile = true
+        }
+      }
+    }
+  }
 
   const result = streamText({
-    model: google("gemma-4-26b-a4b-it"),
+    model: isFile ? google("gemma-4-26b-a4b-it") : groq("openai/gpt-oss-20b"),
     system: `Você é o Assistente Faunbi, uma IA operacional integrada a ferramentas de gestão empresarial.
 
 Você ajuda pequenos negócios, autônomos e prestadores de serviço a executar tarefas administrativas dentro da plataforma Faunbi.
@@ -98,6 +117,12 @@ Você deve parecer um funcionário administrativo inteligente, não um chatbot g
           thinkingLevel: "minimal",
         },
       } satisfies GoogleLanguageModelOptions,
+       groq: {
+        
+      reasoningFormat: 'parsed',
+      reasoningEffort: 'low',
+      parallelToolCalls: true, // Enable parallel function calling (default: true)
+    } satisfies GroqLanguageModelOptions,
     },
   })
 

@@ -248,7 +248,7 @@ export default function HowItWorksLandingUi() {
                         alt="Faunbi Logo"
                         width={16}
                         height={16}
-                        className="h-4 w-4"
+                        className="size-6"
                       />
                       <span className="absolute right-0 bottom-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500 dark:border-slate-950" />
                     </div>
@@ -285,7 +285,7 @@ export default function HowItWorksLandingUi() {
                       alt="Faunbi Logo"
                       width={16}
                       height={16}
-                      className="h-4 w-4"
+                      className="size-6"
                     />
                   </div>
 

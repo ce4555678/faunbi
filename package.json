@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.72",
+    "@ai-sdk/groq": "^3.0.39",
     "@ai-sdk/react": "^3.0.179",
     "@base-ui/react": "^1.4.1",
     "@clerk/localizations": "^4.6.2",
