@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://faunbi.com/og-image.avif",
+        url: "https://faunbi.com/og-image.png",
         width: 1200,
         height: 630,
         alt: "Faunbi — Gestão inteligente para autônomos e pequenos negócios",

@@ -42,9 +42,9 @@ export default function manifest(): MetadataRoute.Manifest {
 
     screenshots: [
       {
-        src: "/og-image.avif",
-        sizes: "1200x630",
-        type: "image/avif",
+        src: "/og-image.png",
+        sizes: "1731x909",
+        type: "image/png",
         form_factor: "wide",
         label: "Faunbi — Gestão inteligente para autônomos",
       },
