@@ -5,7 +5,9 @@ import { cn } from "@/lib/utils"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
-
+import type { Metadata, Viewport } from "next"
+import Providers from "./providers"
+import { Suspense } from "react"
 const interHeading = Inter({ subsets: ["latin"], variable: "--font-heading" })
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" })
@@ -15,13 +17,13 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-import type { Metadata, Viewport } from "next"
-import Providers from "./providers"
-import { Suspense } from "react"
-import { ViewportTheme } from "@/components/viewport-theme"
+
 
 export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)",  color: "#09090b" },
+  ],
 }
 
 export const metadata: Metadata = {
@@ -137,7 +139,6 @@ export default function RootLayout({
             </TooltipProvider>
           </NuqsAdapter>
           <Suspense>
-            <ViewportTheme/>
           </Suspense>
         </ThemeProvider>
       </body>
