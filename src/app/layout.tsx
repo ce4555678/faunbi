@@ -7,7 +7,6 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
 import type { Metadata, Viewport } from "next"
 import Providers from "./providers"
-import { Suspense } from "react"
 const interHeading = Inter({ subsets: ["latin"], variable: "--font-heading" })
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" })
@@ -138,8 +137,6 @@ export default function RootLayout({
               <Toaster  richColors/>
             </TooltipProvider>
           </NuqsAdapter>
-          <Suspense>
-          </Suspense>
         </ThemeProvider>
       </body>
     </html>
