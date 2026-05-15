@@ -72,7 +72,7 @@ export function CTALandingUi() {
 
             {/* CTAs */}
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link prefetch href="/auth/sign-up" className="flex items-center gap-2">
+              <Link prefetch href="/auth/signup" className="flex items-center gap-2">
                 <Button
                   size="lg"
                   className="group h-14 w-full rounded-full bg-blue-600 px-8 text-base font-bold text-white shadow-xl shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-blue-600/35 sm:w-auto sm:text-lg dark:bg-blue-500 dark:hover:bg-blue-400"

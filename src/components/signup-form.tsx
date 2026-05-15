@@ -219,7 +219,7 @@ export function SignupForm({
             Criar conta com Google
           </Button>
           <FieldDescription className="px-6 text-center">
-            Já tem uma conta? <Link href="/auth/login" className="text-primary hover:underline">
+            Já tem uma conta? <Link prefetch href="/auth/login" className="text-primary hover:underline">
               Entrar
             </Link>
           </FieldDescription>

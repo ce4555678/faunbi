@@ -71,7 +71,8 @@ export function HeaderLandingUi() {
           {/* Desktop Navigation */}
           <div className="hidden items-center rounded-full border border-slate-200/80 bg-white/70 p-1 shadow-sm backdrop-blur-xl lg:flex dark:border-slate-800 dark:bg-slate-900/60">
             {navLinks.map((link) => (
-              <Link prefetch
+              <Link
+                prefetch
                 key={link.href}
                 href={link.href}
                 className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
@@ -83,15 +84,21 @@ export function HeaderLandingUi() {
 
           {/* Desktop CTA */}
           <div className="hidden items-center gap-3 lg:flex">
-            <ButtonTheme/>
+            <ButtonTheme />
             <Button
               variant="ghost"
               size="sm"
               className="font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
             >
-              <Link prefetch href="/auth/login">Entrar</Link>
+              <Link prefetch href="/auth/login">
+                Entrar
+              </Link>
             </Button>
-            <Link prefetch className="flex items-center gap-2" href="/auth/signup">
+            <Link
+              prefetch
+              className="flex items-center gap-2"
+              href="/auth/signup"
+            >
               <Button
                 size="sm"
                 className="group h-10 rounded-full bg-blue-600 px-5 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
@@ -105,24 +112,23 @@ export function HeaderLandingUi() {
 
           {/* Mobile Menu Toggle */}
           <div className="flex items-center gap-3 lg:hidden">
-              <ButtonTheme/>
-              <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="h-10 w-10 rounded-full border border-slate-200 bg-white/80 text-slate-900 shadow-sm backdrop-blur-xl hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900/80 dark:text-white dark:hover:bg-slate-800"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
-            aria-expanded={isMobileMenuOpen}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
+            <ButtonTheme />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 rounded-full border border-slate-200 bg-white/80 text-slate-900 shadow-sm backdrop-blur-xl hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900/80 dark:text-white dark:hover:bg-slate-800"
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </Button>
           </div>
-          
         </div>
 
         {/* Mobile Menu */}
@@ -138,7 +144,8 @@ export function HeaderLandingUi() {
             <div className="rounded-3xl border border-slate-200 bg-white/95 p-3 shadow-2xl shadow-slate-950/10 backdrop-blur-2xl dark:border-slate-800 dark:bg-slate-950/95">
               <div className="flex flex-col gap-1">
                 {navLinks.map((link) => (
-                  <Link prefetch
+                  <Link
+                    prefetch
                     key={link.href}
                     href={link.href}
                     className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-blue-50 hover:text-blue-700 dark:text-slate-300 dark:hover:bg-blue-950/40 dark:hover:text-blue-200"
@@ -151,28 +158,31 @@ export function HeaderLandingUi() {
 
               <div className="mt-3 border-t border-slate-200 pt-3 dark:border-slate-800">
                 <div className="grid gap-2">
-                  <Button
-                    variant="outline"
-                    className="h-11 rounded-2xl border-slate-300 bg-white font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
+                  <Link
+                    prefetch
+                    className="w-full"
+                    href="/auth/login"
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <Link prefetch
-                      href="/auth/login"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                    <Button
+                      variant="outline"
+                      className="h-11 w-full rounded-2xl border-slate-300 bg-white font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
                     >
                       Entrar
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
 
-                  <Button className="h-11 rounded-2xl bg-blue-600 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400">
-                    <Link prefetch
-                      href="/auth/chat"
-                      className="flex items-center justify-center gap-2"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
+                  <Link
+                    prefetch
+                    href="/auth/signup"
+                    className="w-full"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Button className="h-11 w-full rounded-2xl bg-blue-600 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400">
                       <MessageSquare className="h-4 w-4" />
                       Começar Grátis
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 </div>
 
                 <p className="mt-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400">

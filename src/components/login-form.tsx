@@ -150,7 +150,7 @@ export function LoginForm({
           </Button>
           <FieldDescription className="text-center">
             Não tem uma conta?{" "}
-            <Link href="/auth/signup" className="underline underline-offset-4">
+            <Link prefetch href="/auth/signup" className="underline underline-offset-4">
               Inscrever-se
             </Link>
           </FieldDescription>
