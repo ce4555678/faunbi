@@ -302,7 +302,7 @@ export default function ModulesLandingUi() {
 
               {/* CTA */}
               <div className="mt-8 border-t border-border/50 pt-6">
-                <Link href="/auth/sign-up" className="flex items-center gap-2">
+                <Link prefetch href="/auth/signup" className="flex items-center gap-2">
                   <Button className="gap-2">
                     Experimentar {activeModule.name}
                     <ArrowRight className="h-4 w-4" />

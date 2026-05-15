@@ -190,7 +190,7 @@ export default function HeroLandingUi() {
 
           {/* CTAs */}
           <div className="flex animate-in flex-col items-center justify-center gap-4 delay-400 duration-700 fade-in slide-in-from-bottom-4 sm:flex-row">
-            <Link href="/auth/sign-up" className="flex items-center gap-2">
+            <Link prefetch href="/auth/signup" className="flex items-center gap-2">
               <Button
                 size="lg"
                 className="h-12 gap-2 bg-blue-600 px-8 text-base font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
@@ -205,7 +205,7 @@ export default function HeroLandingUi() {
               variant="outline"
               className="group h-12 gap-2 border-slate-300 bg-white px-8 text-base font-semibold text-slate-900 shadow-sm hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
             >
-              <Link className="flex items-center gap-2" href="#how-it-works">
+              <Link prefetch className="flex items-center gap-2" href="#how-it-works">
                 Ver como funciona
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>

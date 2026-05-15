@@ -49,7 +49,7 @@ export function HeaderLandingUi() {
           )}
         >
           {/* Logo */}
-          <Link href="/" className="group flex items-center gap-3">
+          <Link prefetch href="/" className="group flex items-center gap-3">
             <Image
               className="size-10"
               src="/faunbi.svg"
@@ -71,7 +71,7 @@ export function HeaderLandingUi() {
           {/* Desktop Navigation */}
           <div className="hidden items-center rounded-full border border-slate-200/80 bg-white/70 p-1 shadow-sm backdrop-blur-xl lg:flex dark:border-slate-800 dark:bg-slate-900/60">
             {navLinks.map((link) => (
-              <Link
+              <Link prefetch
                 key={link.href}
                 href={link.href}
                 className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
@@ -89,9 +89,9 @@ export function HeaderLandingUi() {
               size="sm"
               className="font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
             >
-              <Link href="/auth/login">Entrar</Link>
+              <Link prefetch href="/auth/login">Entrar</Link>
             </Button>
-            <Link className="flex items-center gap-2" href="/auth/signup">
+            <Link prefetch className="flex items-center gap-2" href="/auth/signup">
               <Button
                 size="sm"
                 className="group h-10 rounded-full bg-blue-600 px-5 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
@@ -138,7 +138,7 @@ export function HeaderLandingUi() {
             <div className="rounded-3xl border border-slate-200 bg-white/95 p-3 shadow-2xl shadow-slate-950/10 backdrop-blur-2xl dark:border-slate-800 dark:bg-slate-950/95">
               <div className="flex flex-col gap-1">
                 {navLinks.map((link) => (
-                  <Link
+                  <Link prefetch
                     key={link.href}
                     href={link.href}
                     className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-blue-50 hover:text-blue-700 dark:text-slate-300 dark:hover:bg-blue-950/40 dark:hover:text-blue-200"
@@ -155,8 +155,8 @@ export function HeaderLandingUi() {
                     variant="outline"
                     className="h-11 rounded-2xl border-slate-300 bg-white font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
                   >
-                    <Link
-                      href="/login"
+                    <Link prefetch
+                      href="/auth/login"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Entrar
@@ -164,8 +164,8 @@ export function HeaderLandingUi() {
                   </Button>
 
                   <Button className="h-11 rounded-2xl bg-blue-600 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400">
-                    <Link
-                      href="/chat"
+                    <Link prefetch
+                      href="/auth/chat"
                       className="flex items-center justify-center gap-2"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
