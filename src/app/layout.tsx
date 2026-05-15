@@ -17,6 +17,8 @@ const fontMono = Geist_Mono({
 
 import type { Metadata, Viewport } from "next"
 import Providers from "./providers"
+import { Suspense } from "react"
+import { ViewportTheme } from "@/components/viewport-theme"
 
 export const viewport: Viewport = {
   themeColor: "#FFFFFF",
@@ -134,6 +136,9 @@ export default function RootLayout({
               <Toaster  richColors/>
             </TooltipProvider>
           </NuqsAdapter>
+          <Suspense>
+            <ViewportTheme/>
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>
