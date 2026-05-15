@@ -118,10 +118,14 @@ export function LoginForm({
         <FieldSeparator>Ou continuar com</FieldSeparator>
 
         <Field>
-          <Button onClick={async () => {
-            await authClient.signIn.social({
+          <Button onClick={() => {
+            authClient.signIn.social({
               provider: "google",
-              newUserCallbackURL: "/chatbot"
+              callbackURL: "/chatbot"
+            }).catch(() => {
+              toast.error("Falha ao entrar com Google", {
+                description: "Tente novamente mais tarde.",
+              })
             })
           }} variant="outline" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

@@ -69,7 +69,7 @@ export function HeaderLandingUi() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center rounded-full border border-slate-200/80 bg-white/70 p-1 shadow-sm backdrop-blur-xl md:flex dark:border-slate-800 dark:bg-slate-900/60">
+          <div className="hidden items-center rounded-full border border-slate-200/80 bg-white/70 p-1 shadow-sm backdrop-blur-xl lg:flex dark:border-slate-800 dark:bg-slate-900/60">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -82,7 +82,7 @@ export function HeaderLandingUi() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <ButtonTheme/>
             <Button
               variant="ghost"
@@ -104,11 +104,13 @@ export function HeaderLandingUi() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <Button
+          <div className="flex items-center gap-3 lg:hidden">
+              <ButtonTheme/>
+              <Button
             type="button"
             variant="ghost"
             size="icon"
-            className="h-10 w-10 rounded-full border border-slate-200 bg-white/80 text-slate-900 shadow-sm backdrop-blur-xl hover:bg-slate-100 md:hidden dark:border-slate-800 dark:bg-slate-900/80 dark:text-white dark:hover:bg-slate-800"
+            className="h-10 w-10 rounded-full border border-slate-200 bg-white/80 text-slate-900 shadow-sm backdrop-blur-xl hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900/80 dark:text-white dark:hover:bg-slate-800"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={isMobileMenuOpen}
@@ -119,12 +121,14 @@ export function HeaderLandingUi() {
               <Menu className="h-5 w-5" />
             )}
           </Button>
+          </div>
+          
         </div>
 
         {/* Mobile Menu */}
         <div
           className={cn(
-            "grid overflow-hidden transition-all duration-300 md:hidden",
+            "grid overflow-hidden transition-all duration-300 lg:hidden",
             isMobileMenuOpen
               ? "grid-rows-[1fr] pb-4 opacity-100"
               : "grid-rows-[0fr] opacity-0"

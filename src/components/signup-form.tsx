@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -9,13 +11,83 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { toast } from "sonner"
+import { Eye, EyeOff } from "lucide-react"
+import { useState } from "react"
+import { authClient } from "@/lib/auth-client"
+
+// ─── Schema ───────────────────────────────────────────────────────────────────
+
+const signupSchema = z
+  .object({
+    name: z
+      .string()
+      .min(1, "Nome é obrigatório")
+      .min(3, "Nome deve ter pelo menos 3 caracteres"),
+    email: z
+      .string()
+      .min(1, "Email é obrigatório")
+      .email("Digite um email válido"),
+    password: z
+      .string()
+      .min(1, "Senha é obrigatória")
+      .min(8, "A senha deve ter ao menos 8 caracteres"),
+    confirmPassword: z
+      .string()
+      .min(1, "Confirmação de senha é obrigatória"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "As senhas não conferem",
+    path: ["confirmPassword"],
+  })
+
+type SignupFormValues = z.infer<typeof signupSchema>
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export function SignupForm({
   className,
   ...props
-}: React.ComponentProps<"form">) {
+}: Omit<React.ComponentProps<"form">, "onSubmit">) {
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignupFormValues>({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  })
+
+  async function onSubmit(data: SignupFormValues) {
+    try {
+      // Substitua por sua chamada real de cadastro
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      console.log(data)
+      toast.success("Cadastro realizado com sucesso!")
+    } catch {
+      toast.error("Falha ao criar conta", {
+        description: "Verifique os dados e tente novamente.",
+      })
+    }
+  }
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form
+      className={cn("flex flex-col gap-6", className)}
+      onSubmit={handleSubmit(onSubmit)}
+      {...props}
+    >
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Criar sua conta</h1>
@@ -29,9 +101,12 @@ export function SignupForm({
             id="name"
             type="text"
             placeholder="João Silva"
-            required
-            className="bg-background"
+            aria-invalid={!!errors.name}
+            {...register("name")}
           />
+          {errors.name && (
+            <p className="text-sm text-destructive">{errors.name.message}</p>
+          )}
         </Field>
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -39,9 +114,12 @@ export function SignupForm({
             id="email"
             type="email"
             placeholder="seu@email.com"
-            required
-            className="bg-background"
+            aria-invalid={!!errors.email}
+            {...register("email")}
           />
+          {errors.email && (
+            <p className="text-sm text-destructive">{errors.email.message}</p>
+          )}
           <FieldDescription>
             Usaremos isso para entrar em contato com você. Não compartilharemos seu email
             com ninguém mais.
@@ -49,32 +127,77 @@ export function SignupForm({
         </Field>
         <Field>
           <FieldLabel htmlFor="password">Senha</FieldLabel>
-          <Input
-            id="password"
-            type="password"
-            required
-            className="bg-background"
-          />
+          <div className="relative">
+            <Input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              aria-invalid={!!errors.password}
+              {...register("password")}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+            >
+              {showPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
+            </button>
+          </div>
+          {errors.password && (
+            <p className="text-sm text-destructive">{errors.password.message}</p>
+          )}
           <FieldDescription>
             Deve ter pelo menos 8 caracteres.
           </FieldDescription>
         </Field>
         <Field>
           <FieldLabel htmlFor="confirm-password">Confirmar Senha</FieldLabel>
-          <Input
-            id="confirm-password"
-            type="password"
-            required
-            className="bg-background"
-          />
+          <div className="relative">
+            <Input
+              id="confirm-password"
+              type={showConfirmPassword ? "text" : "password"}
+              aria-invalid={!!errors.confirmPassword}
+              {...register("confirmPassword")}
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              aria-label={showConfirmPassword ? "Ocultar senha" : "Mostrar senha"}
+            >
+              {showConfirmPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
+            </button>
+          </div>
+          {errors.confirmPassword && (
+            <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+          )}
           <FieldDescription>Por favor, confirme sua senha.</FieldDescription>
         </Field>
         <Field>
-          <Button type="submit">Criar Conta</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Criando conta..." : "Criar Conta"}
+          </Button>
         </Field>
         <FieldSeparator>Ou continuar com</FieldSeparator>
         <Field>
-          <Button variant="outline" type="button">
+          <Button onClick={() => {
+                      authClient.signIn.social({
+                        provider: "google",
+                        callbackURL: "/chatbot"
+                      }).catch(() => {
+                        toast.error("Falha ao entrar com Google", {
+                          description: "Tente novamente mais tarde.",
+                        })
+                      })
+                    }} variant="outline" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
