@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Menu, X, MessageSquare, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import ButtonTheme from "../button-theme"
 
 const navLinks = [
   { href: "#features", label: "Funcionalidades" },
@@ -82,6 +83,7 @@ export function HeaderLandingUi() {
 
           {/* Desktop CTA */}
           <div className="hidden items-center gap-3 md:flex">
+            <ButtonTheme/>
             <Button
               variant="ghost"
               size="sm"
