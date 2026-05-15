@@ -91,7 +91,7 @@ export function HeaderLandingUi() {
             >
               <Link href="/auth/login">Entrar</Link>
             </Button>
-            <Link className="flex items-center gap-2" href="/auth/sign-up">
+            <Link className="flex items-center gap-2" href="/auth/signup">
               <Button
                 size="sm"
                 className="group h-10 rounded-full bg-blue-600 px-5 font-semibold text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"

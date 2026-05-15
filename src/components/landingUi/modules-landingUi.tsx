@@ -145,11 +145,11 @@ export default function ModulesLandingUi() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto mb-16 max-w-3xl text-center">
-          <span className="mb-4 inline-block text-sm font-semibold text-primary">
+          <span className="mb-4 inline-block text-sm font-semibold text-primary dark:text-blue-400">
             MÓDULOS
           </span>
           <h2 className="mb-6 text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-5xl">
-            Cinco pilares, <span className="text-primary">um só chat</span>
+            Cinco pilares, <span className="text-primary dark:text-blue-400">um só chat</span>
           </h2>
           <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
             Todos os módulos integrados e acessíveis através de conversas

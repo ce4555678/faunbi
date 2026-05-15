@@ -135,7 +135,7 @@ const ChatBot = () => {
                 <div className="flex h-full min-h-[52vh] items-center justify-center px-4 text-center">
                   <div className="mx-auto max-w-md space-y-5">
                     <div className="mx-auto flex size-14 items-center justify-center rounded-2xl border bg-primary/10 text-primary shadow-sm">
-                      <SparklesIcon className="size-6" />
+                      <SparklesIcon className="size-6 dark:text-blue-300" />
                     </div>
 
                     <div className="space-y-2">

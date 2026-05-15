@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import ChatBot from "./chatbot"
-import { Spinner } from "@/components/ui/spinner"
+import ChatSkeleton from "@/components/chatbot-skeleton"
 
 export const metadata = {
   title: "ChatBot",
@@ -10,10 +10,7 @@ export default function ChatBotPage() {
   return (
     <Suspense
       fallback={
-        <div>
-          <Spinner />
-          Loading...
-        </div>
+        <ChatSkeleton/>
       }
     >
       <ChatBot />
