@@ -7,7 +7,7 @@ import { useEffect, useEffectEvent } from "react"
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   const { setSession } = useSessionStore()
-  const { resolvedTheme } = useTheme()
+  const { resolvedTheme, theme } = useTheme()
 
   const {
     data: session,
@@ -25,7 +25,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     // Define a cor baseada no tema
     metaThemeColor.setAttribute(
       "content",
-      resolvedTheme === "dark" ? "#09090b" : "#ffffff"
+      resolvedTheme == "dark" ? "#09090b" : "#ffffff"
     )
   })
   const setSessionStore = useEffectEvent(() => {
@@ -44,7 +44,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     setSessionStore()
     dinamicTheme()
-  }, [session, isPending, resolvedTheme])
+  }, [session, isPending, resolvedTheme, theme])
 
   return <>{children}</>
 }
