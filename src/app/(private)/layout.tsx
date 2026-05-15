@@ -23,10 +23,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Separator orientation="vertical" className="h-4" />
 
             <Suspense fallback={<Spinner className="size-5" />}>
-            <div className="flex items-center justify-between w-full">
-              <RouteBreadcrumb />
-              <ButtonTheme/>
-            </div>
+              <div className="flex w-full items-center justify-between">
+                <RouteBreadcrumb />
+                <ButtonTheme />
+              </div>
             </Suspense>
           </div>
         </header>

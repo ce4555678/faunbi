@@ -48,7 +48,7 @@ export const auth = betterAuth({
     schema: {
       user: userDb,
       account: accountDb,
-      apikey: apikeyDb
-    }
+      apikey: apikeyDb,
+    },
   }),
 })

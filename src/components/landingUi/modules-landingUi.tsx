@@ -149,7 +149,8 @@ export default function ModulesLandingUi() {
             MÓDULOS
           </span>
           <h2 className="mb-6 text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-5xl">
-            Cinco pilares, <span className="text-primary dark:text-blue-400">um só chat</span>
+            Cinco pilares,{" "}
+            <span className="text-primary dark:text-blue-400">um só chat</span>
           </h2>
           <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
             Todos os módulos integrados e acessíveis através de conversas
@@ -302,7 +303,11 @@ export default function ModulesLandingUi() {
 
               {/* CTA */}
               <div className="mt-8 border-t border-border/50 pt-6">
-                <Link prefetch href="/auth/signup" className="flex items-center gap-2">
+                <Link
+                  prefetch
+                  href="/auth/signup"
+                  className="flex items-center gap-2"
+                >
                   <Button className="gap-2">
                     Experimentar {activeModule.name}
                     <ArrowRight className="h-4 w-4" />

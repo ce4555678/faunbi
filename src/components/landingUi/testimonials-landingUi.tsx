@@ -66,11 +66,12 @@ export function TestimonialsLandingUi() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto mb-16 max-w-3xl text-center">
-          <span className="mb-4 inline-block text-sm dark:text-blue-400 font-semibold text-primary">
+          <span className="mb-4 inline-block text-sm font-semibold text-primary dark:text-blue-400">
             DEPOIMENTOS
           </span>
           <h2 className="mb-6 text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-5xl">
-            Quem usa, <span className="text-primary dark:text-blue-400">recomenda</span>
+            Quem usa,{" "}
+            <span className="text-primary dark:text-blue-400">recomenda</span>
           </h2>
           <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
             Mais de 2.000 profissionais já transformaram seus negócios com a

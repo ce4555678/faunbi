@@ -16,12 +16,10 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-
-
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)",  color: "#09090b" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
   ],
   colorScheme: "light dark",
 }
@@ -57,25 +55,8 @@ export const metadata: Metadata = {
   ],
 
   icons: {
-    icon: [
-      {
-        url: "/icon512_rounded.png",
-        sizes: "512x512",
-        type: "image/png",
-      },
-    ],
     apple: [
-      {
-        url: "/icon512_rounded.png",
-        sizes: "512x512",
-        type: "image/png",
-      },
-    ],
-    other: [
-      {
-        rel: "mask-icon",
-        url: "/icon512_maskable.png",
-      },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
 
@@ -135,7 +116,7 @@ export default function RootLayout({
           <NuqsAdapter>
             <TooltipProvider>
               <Providers>{children}</Providers>
-              <Toaster  richColors/>
+              <Toaster richColors />
             </TooltipProvider>
           </NuqsAdapter>
         </ThemeProvider>

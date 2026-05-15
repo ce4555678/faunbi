@@ -8,11 +8,7 @@ export const metadata = {
 
 export default function ChatBotPage() {
   return (
-    <Suspense
-      fallback={
-        <ChatSkeleton/>
-      }
-    >
+    <Suspense fallback={<ChatSkeleton />}>
       <ChatBot />
     </Suspense>
   )

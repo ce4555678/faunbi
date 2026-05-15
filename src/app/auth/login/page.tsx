@@ -9,8 +9,8 @@ export const metadata = {
 }
 export default function LoginPage() {
   return (
-    <div className="grid min-h-svh lg:grid-cols-2 bg-white dark:bg-slate-950">
-      <div className="flex flex-col gap-4 p-6 md:p-10 bg-white dark:bg-slate-950">
+    <div className="grid min-h-svh bg-white lg:grid-cols-2 dark:bg-slate-950">
+      <div className="flex flex-col gap-4 bg-white p-6 md:p-10 dark:bg-slate-950">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 font-medium">
             <Image

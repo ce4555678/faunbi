@@ -28,15 +28,15 @@ import {
 
 export function NavUser() {
   const { isMobile } = useSidebar()
-  const {session} = useSessionStore()
+  const { session } = useSessionStore()
   const fallback =
-      session?.name &&
-      session.name
-        .split(" ")
-        .map((name) => name[0])
-        .join("")
-        .slice(0, 2)
-        .toUpperCase()
+    session?.name &&
+    session.name
+      .split(" ")
+      .map((name) => name[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase()
 
   return (
     <SidebarMenu>
@@ -51,10 +51,7 @@ export function NavUser() {
             }
           >
             <Avatar className="size-8 rounded-lg">
-              <AvatarImage
-                src={session?.image}
-                alt={session?.name || "User"}
-              />
+              <AvatarImage src={session?.image} alt={session?.name || "User"} />
               <AvatarFallback className="rounded-lg text-xs">
                 {fallback}
               </AvatarFallback>

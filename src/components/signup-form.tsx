@@ -35,9 +35,7 @@ const signupSchema = z
       .string()
       .min(1, "Senha é obrigatória")
       .min(8, "A senha deve ter ao menos 8 caracteres"),
-    confirmPassword: z
-      .string()
-      .min(1, "Confirmação de senha é obrigatória"),
+    confirmPassword: z.string().min(1, "Confirmação de senha é obrigatória"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "As senhas não conferem",
@@ -121,8 +119,8 @@ export function SignupForm({
             <p className="text-sm text-destructive">{errors.email.message}</p>
           )}
           <FieldDescription>
-            Usaremos isso para entrar em contato com você. Não compartilharemos seu email
-            com ninguém mais.
+            Usaremos isso para entrar em contato com você. Não compartilharemos
+            seu email com ninguém mais.
           </FieldDescription>
         </Field>
         <Field>
@@ -137,7 +135,7 @@ export function SignupForm({
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
               aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
             >
               {showPassword ? (
@@ -148,11 +146,11 @@ export function SignupForm({
             </button>
           </div>
           {errors.password && (
-            <p className="text-sm text-destructive">{errors.password.message}</p>
+            <p className="text-sm text-destructive">
+              {errors.password.message}
+            </p>
           )}
-          <FieldDescription>
-            Deve ter pelo menos 8 caracteres.
-          </FieldDescription>
+          <FieldDescription>Deve ter pelo menos 8 caracteres.</FieldDescription>
         </Field>
         <Field>
           <FieldLabel htmlFor="confirm-password">Confirmar Senha</FieldLabel>
@@ -166,8 +164,10 @@ export function SignupForm({
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-              aria-label={showConfirmPassword ? "Ocultar senha" : "Mostrar senha"}
+              className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+              aria-label={
+                showConfirmPassword ? "Ocultar senha" : "Mostrar senha"
+              }
             >
               {showConfirmPassword ? (
                 <EyeOff className="h-4 w-4" />
@@ -177,7 +177,9 @@ export function SignupForm({
             </button>
           </div>
           {errors.confirmPassword && (
-            <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+            <p className="text-sm text-destructive">
+              {errors.confirmPassword.message}
+            </p>
           )}
           <FieldDescription>Por favor, confirme sua senha.</FieldDescription>
         </Field>
@@ -188,16 +190,22 @@ export function SignupForm({
         </Field>
         <FieldSeparator>Ou continuar com</FieldSeparator>
         <Field>
-          <Button onClick={() => {
-                      authClient.signIn.social({
-                        provider: "google",
-                        callbackURL: "/chatbot"
-                      }).catch(() => {
-                        toast.error("Falha ao entrar com Google", {
-                          description: "Tente novamente mais tarde.",
-                        })
-                      })
-                    }} variant="outline" type="button">
+          <Button
+            onClick={() => {
+              authClient.signIn
+                .social({
+                  provider: "google",
+                  callbackURL: "/chatbot",
+                })
+                .catch(() => {
+                  toast.error("Falha ao entrar com Google", {
+                    description: "Tente novamente mais tarde.",
+                  })
+                })
+            }}
+            variant="outline"
+            type="button"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -219,7 +227,12 @@ export function SignupForm({
             Criar conta com Google
           </Button>
           <FieldDescription className="px-6 text-center">
-            Já tem uma conta? <Link prefetch href="/auth/login" className="text-primary hover:underline">
+            Já tem uma conta?{" "}
+            <Link
+              prefetch
+              href="/auth/login"
+              className="text-primary hover:underline"
+            >
               Entrar
             </Link>
           </FieldDescription>
