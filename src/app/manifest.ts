@@ -12,8 +12,8 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     orientation: "portrait",
 
-    background_color: "#ffffff",
-    theme_color: "#2563eb",
+    background_color: "#09090b",
+    theme_color: "#ffffff",
 
     categories: ["business", "productivity", "finance"],
 
@@ -21,11 +21,6 @@ export default function manifest(): MetadataRoute.Manifest {
     dir: "ltr",
 
     icons: [
-      {
-        src: "/favicon.ico",
-        sizes: "any",
-        type: "image/x-icon",
-      },
       {
         src: "/icon512_rounded.png",
         sizes: "512x512",
