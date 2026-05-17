@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client"
 import useSessionStore from "@/store/session.store"
 import { useEffect, useEffectEvent } from "react"
+import { RealtimeProvider } from "@upstash/realtime/client"
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   const { setSession } = useSessionStore()
@@ -29,7 +30,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     setSessionStore()
   }, [session, isPending])
 
-  return <>{children}</>
+  return <RealtimeProvider>{children}</RealtimeProvider>
 }
 
 export default Providers

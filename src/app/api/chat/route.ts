@@ -111,6 +111,8 @@ Você deve parecer um funcionário administrativo inteligente, não um chatbot g
     messages: await convertToModelMessages(messages),
     topP: 0.1,
     temperature: 0.1,
+      maxOutputTokens: 512,
+
     providerOptions: {
       google: {
         thinkingConfig: {

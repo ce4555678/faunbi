@@ -16,6 +16,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { toast } from "sonner"
 import { authClient } from "@/lib/auth-client"
+import useSessionStore from "@/store/session.store"
+import { redirect } from "next/navigation"
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
 
@@ -41,22 +43,31 @@ export function LoginForm({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
   })
 
-  async function onSubmit(data: LoginFormValues) {
-    try {
-      // substitua por sua chamada real de autenticação
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log(data)
-      toast.success("Login realizado com sucesso!")
-    } catch {
+  const { session } = useSessionStore()
+
+  if (session) redirect("/chatbot")
+
+  async function onSubmit({ email, password }: LoginFormValues) {
+    const { error } = await authClient.signIn.email({
+      email, // required
+      password, // required
+      rememberMe: true,
+      callbackURL: "/chatbot",
+    })
+
+    if (error) {
       toast.error("Falha ao entrar", {
-        description: "Verifique suas credenciais e tente novamente.",
+        description:
+          error.message || "Verifique suas credenciais e tente novamente.",
       })
+      reset()
     }
   }
 
@@ -91,12 +102,12 @@ export function LoginForm({
         <Field>
           <div className="flex items-center">
             <FieldLabel htmlFor="password">Senha</FieldLabel>
-            <a
-              href="#"
+            <Link
+              href="/auth/reset"
               className="ml-auto text-sm underline-offset-4 hover:underline"
             >
               Esqueceu sua senha?
-            </a>
+            </Link>
           </div>
           <Input
             id="password"

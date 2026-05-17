@@ -42,6 +42,7 @@ import { Spinner } from "@/components/ui/spinner"
 import { Button } from "@/components/ui/button"
 import { PlusIcon, SparklesIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { generateId } from 'ai';
 
 const PromptInputAttachmentsDisplay = () => {
   const attachments = usePromptInputAttachments()
@@ -71,8 +72,9 @@ const PromptInputAttachmentsDisplay = () => {
 
 const ChatBot = () => {
   const [text, setText] = useState<string>("")
-
-  const { messages, status, sendMessage, setMessages } = useChat()
+  const id = generateId()
+  const { messages, status, sendMessage, setMessages } = useChat({
+  })
 
   const isStreaming = status === "streaming"
   const isSubmitted = status === "submitted"
