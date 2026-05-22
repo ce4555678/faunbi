@@ -1,4 +1,5 @@
 import { Client } from "@upstash/workflow"
+import { BASE_URL } from "./utils"
 
 const clientTrigger = new Client({ token: process.env.QSTASH_TOKEN ?? "" })
 

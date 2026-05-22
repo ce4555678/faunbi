@@ -1,30 +1,44 @@
-import { streamText, UIMessage, convertToModelMessages } from "ai"
-import { google, GoogleLanguageModelOptions } from "@ai-sdk/google"
+import { streamText, UIMessage, convertToModelMessages, tool } from "ai"
+import { GoogleLanguageModelOptions } from "@ai-sdk/google"
 import { groq, GroqLanguageModelOptions } from "@ai-sdk/groq"
+import z from "zod/v4"
+import { headers } from "next/headers"
+import { auth } from "@/lib/auth"
+import { NextResponse } from "next/server"
+import clientTrigger from "@/lib/client-trigger"
+import { BASE_URL } from "@/lib/utils"
+
+const BodySchema = z.object({
+  id: z.string()
+    .min(8)
+    .max(64)
+    .regex(/^[a-zA-Z0-9_-]+$/, "ID inválido"),
+  messages: z.array(z.any()),
+})
+
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json()
+  const { messages, id }: { messages: UIMessage[]; id: string } =
+    await req.json()
+    const isValid = await BodySchema.safeParseAsync({
+      id,
+      messages
+    })
+    if(!isValid.success) return NextResponse.json({
+      error: "Chat inválido"
+     }, {
+      status: 401
+    })
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  })
+  if (!session)
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-  let isFile = false
-  for (const message of messages) {
-    if (message.role !== "user") continue
+  const userId = session.user.id
 
-    for (const part of message.parts) {
-      if (part.type === "file") {
-        const { mediaType } = part
-
-        if (mediaType.startsWith("image/")) {
-          isFile = true
-        } else if (mediaType === "application/pdf") {
-          isFile = true
-        } else if (mediaType.startsWith("audio/")) {
-          isFile = true
-        }
-      }
-    }
-  }
 
   const result = streamText({
-    model: isFile ? google("gemma-4-26b-a4b-it") : groq("openai/gpt-oss-20b"),
+    model: groq("openai/gpt-oss-20b"),
     system: `Você é o Assistente Faunbi, uma IA operacional integrada a ferramentas de gestão empresarial.
 
 Você ajuda pequenos negócios, autônomos e prestadores de serviço a executar tarefas administrativas dentro da plataforma Faunbi.
@@ -111,7 +125,37 @@ Você deve parecer um funcionário administrativo inteligente, não um chatbot g
     messages: await convertToModelMessages(messages),
     topP: 0.1,
     temperature: 0.1,
-      maxOutputTokens: 512,
+    maxOutputTokens: 512,
+
+    // AQUI ESTÁ O QUE FALTAVA:
+    tools: {
+      criar_cliente: tool({
+        description: "Cria um novo cliente na plataforma Faunbi",
+        inputSchema: z.object({
+          nome: z.string().describe("Nome do cliente"),
+          telefone: z.string().describe("Telefone do cliente é obrigatório"),
+        }),
+        execute: async ({ nome, telefone }) => {
+          // Sua lógica para salvar no banco de dados aqui
+          return { success: true, id: "123", nome }
+        },
+      }),
+      buscar_cliente: tool({
+        description: "Busca um cliente pelo nome",
+        inputSchema: z.object({
+          nome: z.string().describe("Nome ou parte do nome do cliente"),
+        }),
+        execute: async ({ nome }) => {
+          // Sua lógica de busca
+          return { encontrado: true, cliente: { nome, id: "123" } }
+        },
+      }),
+      // ... adicione as outras ferramentas seguindo o mesmo padrão
+    },
+
+    // Dica para o Llama 8B na Groq: Force ele a executar a ferramenta se necessário,
+    // ou deixe em 'auto' para ele decidir baseado no prompt do sistema.
+    toolChoice: "auto",
 
     providerOptions: {
       google: {
@@ -119,7 +163,7 @@ Você deve parecer um funcionário administrativo inteligente, não um chatbot g
           thinkingLevel: "minimal",
         },
       } satisfies GoogleLanguageModelOptions,
-      groq: {
+            groq: {
         reasoningFormat: "parsed",
         reasoningEffort: "low",
         parallelToolCalls: true, // Enable parallel function calling (default: true)
@@ -127,5 +171,22 @@ Você deve parecer um funcionário administrativo inteligente, não um chatbot g
     },
   })
 
-  return result.toUIMessageStreamResponse()
+  return result.toUIMessageStreamResponse({
+    originalMessages: messages,
+    onFinish: async ({ messages: updatedMessages }) => {
+      console.log(updatedMessages)
+      const { workflowRunId } = await clientTrigger.trigger({
+        url: `${BASE_URL}/api/save-chat`,
+        body: {
+          chatId: id,
+          messages: updatedMessages,
+          userId,
+        },
+        retries: 3,
+        
+      })
+
+      console.log(workflowRunId)
+    },
+  })
 }

@@ -29,6 +29,27 @@
       "when": 1778792823857,
       "tag": "0003_high_kat_farrell",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1779401813589,
+      "tag": "0004_woozy_crusher_hogan",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1779403601836,
+      "tag": "0005_mushy_major_mapleleaf",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1779405966088,
+      "tag": "0006_orange_scorpion",
+      "breakpoints": true
     }
   ]
 }
