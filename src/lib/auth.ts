@@ -1,14 +1,12 @@
 import db from "@/db"
 import { betterAuth } from "better-auth"
-import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { admin, haveIBeenPwned } from "better-auth/plugins"
 import redis from "./redis"
 import { apiKey } from "@better-auth/api-key"
 import { nextCookies } from "better-auth/next-js"
-import { userDb } from "@/db/schema/user-db"
-import { accountDb } from "@/db/schema/account-db"
-import { apikeyDb } from "@/db/schema/api-key-db"
 import { i18n } from "@better-auth/i18n"
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { prisma } from "./prisma"
 
 export const auth = betterAuth({
   plugins: [
@@ -125,12 +123,7 @@ export const auth = betterAuth({
       await redis.del(key)
     },
   },
-  database: drizzleAdapter(db, {
-    provider: "pg",
-    schema: {
-      user: userDb,
-      account: accountDb,
-      apikey: apikeyDb,
-    },
-  }),
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
+  }) ,
 })
