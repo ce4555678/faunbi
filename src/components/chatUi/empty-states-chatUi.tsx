@@ -1,27 +1,40 @@
 "use client"
 import { SparklesIcon } from "lucide-react"
-import type { ChatRequestOptions, FileUIPart, UIDataTypes, UIMessage, UITools } from "ai"
+import type {
+  ChatRequestOptions,
+  FileUIPart,
+  UIDataTypes,
+  UIMessage,
+  UITools,
+} from "ai"
 
 type ChatEmptyStateProps = {
-  onExampleClick: (message?: (Omit<UIMessage<unknown, UIDataTypes, UITools>, "id" | "role"> & {
-    id?: string | undefined;
-    role?: "system" | "user" | "assistant" | undefined;
-} & {
-    text?: never;
-    files?: never;
-    messageId?: string;
-}) | {
-    text: string;
-    files?: FileList | FileUIPart[];
-    metadata?: unknown;
-    parts?: never;
-    messageId?: string;
-} | {
-    files: FileList | FileUIPart[];
-    metadata?: unknown;
-    parts?: never;
-    messageId?: string;
-} | undefined, options?: ChatRequestOptions) => void
+  onExampleClick: (
+    message?:
+      | (Omit<UIMessage<unknown, UIDataTypes, UITools>, "id" | "role"> & {
+          id?: string | undefined
+          role?: "system" | "user" | "assistant" | undefined
+        } & {
+          text?: never
+          files?: never
+          messageId?: string
+        })
+      | {
+          text: string
+          files?: FileList | FileUIPart[]
+          metadata?: unknown
+          parts?: never
+          messageId?: string
+        }
+      | {
+          files: FileList | FileUIPart[]
+          metadata?: unknown
+          parts?: never
+          messageId?: string
+        }
+      | undefined,
+    options?: ChatRequestOptions
+  ) => void
 }
 
 const examples = [
@@ -31,7 +44,9 @@ const examples = [
   "Mostre o relatório mensal",
 ]
 
-export default function EmptyStateChatUi({ onExampleClick }: ChatEmptyStateProps) {
+export default function EmptyStateChatUi({
+  onExampleClick,
+}: ChatEmptyStateProps) {
   return (
     <div className="flex h-full min-h-[52vh] items-center justify-center px-4 text-center">
       <div className="mx-auto max-w-md space-y-5">
@@ -55,9 +70,11 @@ export default function EmptyStateChatUi({ onExampleClick }: ChatEmptyStateProps
             <button
               key={item}
               type="button"
-              onClick={() => onExampleClick({
-                text: item
-              })}
+              onClick={() =>
+                onExampleClick({
+                  text: item,
+                })
+              }
               className="rounded-2xl border bg-muted/30 px-4 py-3 text-sm text-muted-foreground transition hover:bg-muted hover:text-foreground"
             >
               {item}

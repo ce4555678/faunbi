@@ -26,7 +26,7 @@ export async function saveChat({
     .values({
       id: chatId,
       userId,
-      title,        // ← salva no insert
+      title, // ← salva no insert
       messages,
       updatedAt: new Date(),
     })
@@ -40,14 +40,18 @@ export async function saveChat({
     })
 }
 
-export async function loadChat(chatId: string, userId?: string): Promise<{
-  title: string;
+export async function loadChat(
+  chatId: string,
+  userId?: string
+): Promise<{
+  title: string
   messages: UIMessage[]
 }> {
-  if (!userId) return {
-    title: "",
-    messages: []
-  }
+  if (!userId)
+    return {
+      title: "",
+      messages: [],
+    }
 
   const row = await db
     .select()
@@ -55,17 +59,20 @@ export async function loadChat(chatId: string, userId?: string): Promise<{
     .where(
       and(
         eq(chatdb.id, chatId),
-        eq(chatdb.userId, userId)  // ← garante que o chat pertence ao usuário
+        eq(chatdb.userId, userId) // ← garante que o chat pertence ao usuário
       )
     )
 
-  if (!row[0]) return {messages:[], title: "Não encontrado"}
+  if (!row[0]) return { messages: [], title: "Não encontrado" }
 
   // se coluna é jsonb → já é objeto, sem parse
   // se coluna é text  → precisa do JSON.parse
-  const messages =  typeof row[0].messages === "string" ? JSON.parse(row[0].messages) : row[0].messages
+  const messages =
+    typeof row[0].messages === "string"
+      ? JSON.parse(row[0].messages)
+      : row[0].messages
   return {
     title: row[0].title || "",
-    messages
+    messages,
   }
 }

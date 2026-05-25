@@ -38,6 +38,6 @@ export default async function parsePDF(url: string): Promise<string> {
     return pdfData as string
   } catch (error) {
     console.error("Erro no processamento do PDF:", error)
-    throw new Error("Erro no processamento do PDF: " + (error))
+    throw new Error("Erro no processamento do PDF: " + error)
   }
 }

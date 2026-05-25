@@ -5,8 +5,10 @@ import redis from "./redis"
 import { apiKey } from "@better-auth/api-key"
 import { nextCookies } from "better-auth/next-js"
 import { i18n } from "@better-auth/i18n"
-import { prismaAdapter } from "better-auth/adapters/prisma";
+import { prismaAdapter } from "better-auth/adapters/prisma"
 import { prisma } from "./prisma"
+import clientTrigger from "./client-trigger"
+import { BASE_URL } from "./utils"
 
 export const auth = betterAuth({
   plugins: [
@@ -97,7 +99,6 @@ export const auth = betterAuth({
       defaultLocale: "pt-BR",
     }),
     nextCookies(),
-
   ],
   emailAndPassword: {
     enabled: true,
@@ -125,5 +126,24 @@ export const auth = betterAuth({
   },
   database: prismaAdapter(prisma, {
     provider: "postgresql",
-  }) ,
+  }),
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user) => {
+          const { workflowRunId } = await clientTrigger.trigger({
+            url: `${BASE_URL}/api/new-user`,
+            body: {
+              email: user.email,
+              name: user.name,
+              id: user.id,
+            },
+            retries: 3,
+          })
+
+          console.log(`create user ${user.id} ${workflowRunId}`)
+        },
+      },
+    },
+  },
 })

@@ -18,7 +18,7 @@ export const GET = async (request: Request) => {
   const session = await auth.api.getSession({
     headers: await headers(),
   })
-if (!session) {
+  if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
   const chats = await db

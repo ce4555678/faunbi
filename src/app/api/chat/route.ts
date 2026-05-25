@@ -9,7 +9,8 @@ import clientTrigger from "@/lib/client-trigger"
 import { BASE_URL } from "@/lib/utils"
 
 const BodySchema = z.object({
-  id: z.string()
+  id: z
+    .string()
     .min(8)
     .max(64)
     .regex(/^[a-zA-Z0-9_-]+$/, "ID inválido"),
@@ -19,15 +20,19 @@ const BodySchema = z.object({
 export async function POST(req: Request) {
   const { messages, id }: { messages: UIMessage[]; id: string } =
     await req.json()
-    const isValid = await BodySchema.safeParseAsync({
-      id,
-      messages
-    })
-    if(!isValid.success) return NextResponse.json({
-      error: "Chat inválido"
-     }, {
-      status: 401
-    })
+  const isValid = await BodySchema.safeParseAsync({
+    id,
+    messages,
+  })
+  if (!isValid.success)
+    return NextResponse.json(
+      {
+        error: "Chat inválido",
+      },
+      {
+        status: 401,
+      }
+    )
   const session = await auth.api.getSession({
     headers: await headers(),
   })
@@ -35,7 +40,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const userId = session.user.id
-
 
   const result = streamText({
     model: groq("openai/gpt-oss-20b"),
@@ -163,7 +167,7 @@ Você deve parecer um funcionário administrativo inteligente, não um chatbot g
           thinkingLevel: "minimal",
         },
       } satisfies GoogleLanguageModelOptions,
-            groq: {
+      groq: {
         reasoningFormat: "parsed",
         reasoningEffort: "low",
         parallelToolCalls: true, // Enable parallel function calling (default: true)
@@ -183,7 +187,6 @@ Você deve parecer um funcionário administrativo inteligente, não um chatbot g
           userId,
         },
         retries: 3,
-        
       })
 
       console.log(workflowRunId)

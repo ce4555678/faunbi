@@ -4,7 +4,7 @@ import { PlusIcon } from "lucide-react"
 
 type ChatHeaderProps = {
   hasMessages: boolean
-  isBusy: boolean,
+  isBusy: boolean
   onNewChat: () => void
 }
 

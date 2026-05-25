@@ -12,40 +12,38 @@ interface Props {
   params: Promise<{ id: string }>
 }
 
-export async function generateMetadata(
-  { params }: Props,
-): Promise<Metadata> {
-      const id = (await params).id
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = (await params).id
 
   const session = await auth.api.getSession({
-      headers: await headers(),
-    })
+    headers: await headers(),
+  })
 
-    if(!session) return {
-        title: "Não encontrado"
+  if (!session)
+    return {
+      title: "Não encontrado",
     }
   const chatHistory = await loadChat(id, session.user.id)
 
- 
   return {
-    title: chatHistory.title
+    title: chatHistory.title,
   }
 }
 
 export default async function ChatIdPage({ params }: Props) {
   // Aguardamos a resolução da Promise dos parâmetros
   const { id } = await params
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    })
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  })
 
-    if(!session) redirect("/auth")
+  if (!session) redirect("/auth")
   const chatHistory = await loadChat(id, session.user.id)
 
-     console.log(chatHistory)
+  console.log(chatHistory)
   return (
     <Suspense fallback={<ChatSkeleton />}>
-      <ChatBot id={id} initialMessages={chatHistory.messages}/>
+      <ChatBot id={id} initialMessages={chatHistory.messages} />
     </Suspense>
   )
 }

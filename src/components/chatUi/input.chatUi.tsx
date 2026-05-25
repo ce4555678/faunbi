@@ -16,7 +16,6 @@ import {
 import ChatUi from "."
 import { ChatStatus } from "ai"
 
-
 type ChatInputProps = {
   text: string
   setText: (text: string) => void

@@ -1,5 +1,11 @@
 "use client"
-import type { ChatRequestOptions, FileUIPart, UIDataTypes, UIMessage, UITools } from "ai"
+import type {
+  ChatRequestOptions,
+  FileUIPart,
+  UIDataTypes,
+  UIMessage,
+  UITools,
+} from "ai"
 import {
   Conversation,
   ConversationContent,
@@ -16,25 +22,32 @@ type ChatMessagesProps = {
   text: string
   setText: (text: string) => void
   status: string
-  sendMessage: (message?: (Omit<UIMessage<unknown, UIDataTypes, UITools>, "id" | "role"> & {
-    id?: string | undefined;
-    role?: "system" | "user" | "assistant" | undefined;
-} & {
-    text?: never;
-    files?: never;
-    messageId?: string;
-}) | {
-    text: string;
-    files?: FileList | FileUIPart[];
-    metadata?: unknown;
-    parts?: never;
-    messageId?: string;
-} | {
-    files: FileList | FileUIPart[];
-    metadata?: unknown;
-    parts?: never;
-    messageId?: string;
-} | undefined, options?: ChatRequestOptions) => void
+  sendMessage: (
+    message?:
+      | (Omit<UIMessage<unknown, UIDataTypes, UITools>, "id" | "role"> & {
+          id?: string | undefined
+          role?: "system" | "user" | "assistant" | undefined
+        } & {
+          text?: never
+          files?: never
+          messageId?: string
+        })
+      | {
+          text: string
+          files?: FileList | FileUIPart[]
+          metadata?: unknown
+          parts?: never
+          messageId?: string
+        }
+      | {
+          files: FileList | FileUIPart[]
+          metadata?: unknown
+          parts?: never
+          messageId?: string
+        }
+      | undefined,
+    options?: ChatRequestOptions
+  ) => void
   isStreaming: boolean
   isSubmitted: boolean
 }
@@ -46,13 +59,13 @@ export default function MessagesChatUi({
   isStreaming,
   isSubmitted,
 }: ChatMessagesProps) {
-
-  
   return (
     <div className="min-h-0 flex-1 overflow-hidden rounded-3xl border bg-background shadow-sm">
       <Conversation className="h-full">
         <ConversationContent className="space-y-5 px-3 py-4 sm:px-6 sm:py-6">
-          {messages.length === 0 && <ChatUi.empty onExampleClick={sendMessage} />}
+          {messages.length === 0 && (
+            <ChatUi.empty onExampleClick={sendMessage} />
+          )}
 
           {messages.map((message, index) => (
             <Message from={message.role} key={`${message.id}${index}`}>
