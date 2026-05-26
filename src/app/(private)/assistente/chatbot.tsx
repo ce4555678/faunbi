@@ -36,6 +36,7 @@ export default function ChatBot({
 
     sendMessage({
       text: message.text,
+      files: message.files,
     })
 
     setText("")
@@ -52,8 +53,8 @@ export default function ChatBot({
   }
 
   return (
-    <div className="flex h-full w-full overflow-hidden bg-muted/20">
-      <section className="mx-auto flex h-full w-full max-w-5xl flex-col px-3 py-3 sm:px-4 lg:px-6">
+    <div className="flex h-full w-full overflow-hidden bg-slate-50 text-slate-950 dark:bg-[#020711] dark:text-slate-100">
+      <section className="mx-auto flex h-full w-full max-w-7xl flex-col px-3 py-4 sm:px-5 lg:px-6">
         <ChatUi.header
           hasMessages={messages.length > 0}
           isBusy={isBusy}

@@ -39,7 +39,7 @@ const ReasoningContext = createContext<ReasoningContextValue | null>(null)
 export const useReasoning = () => {
   const context = useContext(ReasoningContext)
   if (!context) {
-    throw new Error("Reasoning components must be used within Reasoning")
+    throw new Error("Os componentes de Raciocínio (Reasoning) devem ser usados dentro de um Reasoning Provider")
   }
   return context
 }
@@ -67,7 +67,7 @@ export const Reasoning = memo(
     ...props
   }: ReasoningProps) => {
     const resolvedDefaultOpen = defaultOpen ?? isStreaming
-    // Track if defaultOpen was explicitly set to false (to prevent auto-open)
+    // Rastreia se defaultOpen foi explicitamente definido como falso (para evitar a abertura automática)
     const isExplicitlyClosed = defaultOpen === false
 
     const [isOpen, setIsOpen] = useControllableState<boolean>({
@@ -84,7 +84,7 @@ export const Reasoning = memo(
     const [hasAutoClosed, setHasAutoClosed] = useState(false)
     const startTimeRef = useRef<number | null>(null)
 
-    // Track when streaming starts and compute duration
+    // Rastreia quando o streaming começa e calcula a duração
     useEffect(() => {
       if (isStreaming) {
         hasEverStreamedRef.current = true
@@ -97,14 +97,14 @@ export const Reasoning = memo(
       }
     }, [isStreaming, setDuration])
 
-    // Auto-open when streaming starts (unless explicitly closed)
+    // Abre automaticamente quando o streaming começa (a menos que tenha sido fechado explicitamente)
     useEffect(() => {
       if (isStreaming && !isOpen && !isExplicitlyClosed) {
         setIsOpen(true)
       }
     }, [isStreaming, isOpen, setIsOpen, isExplicitlyClosed])
 
-    // Auto-close when streaming ends (once only, and only if it ever streamed)
+    // Fecha automaticamente quando o streaming termina (apenas uma vez, e se tiver transmitido algo)
     useEffect(() => {
       if (
         hasEverStreamedRef.current &&
@@ -156,12 +156,12 @@ export type ReasoningTriggerProps = ComponentProps<
 
 const defaultGetThinkingMessage = (isStreaming: boolean, duration?: number) => {
   if (isStreaming || duration === 0) {
-    return <Shimmer duration={1}>Thinking...</Shimmer>
+    return <Shimmer duration={1}>Pensando...</Shimmer>
   }
   if (duration === undefined) {
-    return <p>Thought for a few seconds</p>
+    return <p>Pensou por alguns segundos</p>
   }
-  return <p>Thought for {duration} seconds</p>
+  return <p>Pensou por {duration} segundos</p>
 }
 
 export const ReasoningTrigger = memo(

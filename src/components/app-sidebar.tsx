@@ -15,11 +15,17 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import {
+  BarChart3Icon,
+  BoxesIcon,
+  CircleDollarSignIcon,
   CreditCardIcon,
+  FileTextIcon,
+  LayoutDashboardIcon,
   LifeBuoyIcon,
   MessageSquareTextIcon,
   SendIcon,
   Settings2Icon,
+  UserRoundIcon,
 } from "lucide-react"
 import Image from "next/image"
 
@@ -27,19 +33,48 @@ const data = {
   navMain: [
     {
       title: "Assistente",
-      url: "/chatbot",
+      url: "/assistente",
       icon: <MessageSquareTextIcon className="size-4" />,
-      isActive: true,
+    },
+    {
+      title: "Clientes",
+      url: "/clients",
+      icon: <UserRoundIcon className="size-4" />,
+    },
+    {
+      title: "Configurações",
+      url: "/settings",
+      icon: <Settings2Icon className="size-4" />,
       items: [
         {
-          title: "Nova conversa",
-          url: "/chatbot",
+          title: "Conta",
+          url: "/settings/account",
         },
         {
-          title: "Histórico",
-          url: "/chatbot/history",
+          title: "Geral",
+          url: "/settings",
         },
       ],
+    },
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: <LayoutDashboardIcon className="size-4" />,
+    },
+    {
+      title: "Estoque",
+      url: "/inventory",
+      icon: <BoxesIcon className="size-4" />,
+    },
+    {
+      title: "Financeiro",
+      url: "/finance",
+      icon: <CircleDollarSignIcon className="size-4" />,
+    },
+    {
+      title: "Orcamentos",
+      url: "/budgets",
+      icon: <FileTextIcon className="size-4" />,
     },
     {
       title: "Planos",
@@ -57,19 +92,9 @@ const data = {
       ],
     },
     {
-      title: "Configurações",
-      url: "/settings",
-      icon: <Settings2Icon className="size-4" />,
-      items: [
-        {
-          title: "Geral",
-          url: "/settings",
-        },
-        {
-          title: "Conta",
-          url: "/settings/account",
-        },
-      ],
+      title: "Relatorios",
+      url: "/reports",
+      icon: <BarChart3Icon className="size-4" />,
     },
     {
       title: "Suporte",
@@ -100,12 +125,12 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="inset" {...props}>
-      <SidebarHeader className="border-b border-sidebar-border/70">
+      <SidebarHeader className="border-b border-slate-800/10 dark:border-slate-800/80">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               size="lg"
-              render={<a href="/chatbot" />}
+              render={<a href="/dashboard" />}
               className="gap-3"
             >
               <div className="flex items-center gap-3">
@@ -139,7 +164,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-sidebar-border/70 p-2">
+      <SidebarFooter className="border-t border-slate-800/10 p-2 dark:border-slate-800/80">
         <NavUser />
       </SidebarFooter>
     </Sidebar>

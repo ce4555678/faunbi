@@ -31,7 +31,7 @@ export const { POST } = serve<ServeBody>(async (context) => {
 
   await context.run("criar banco", async () => {
     await turso.databases.create(id.toLowerCase(), {
-      group: "faunbi"
+      group: "faunbi",
     })
   })
 })

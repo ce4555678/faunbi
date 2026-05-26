@@ -1,5 +1,5 @@
 // app/api/workflow/route.ts
-import { saveChat } from "@/lib/chat-store"
+// import { saveChat } from "@/lib/chat-store"
 import { serve } from "@upstash/workflow/nextjs"
 import { UIDataTypes, UIMessage, UITools } from "ai"
 
@@ -12,10 +12,10 @@ export const { POST } = serve<ServeBody>(async (context) => {
   const { userId, chatId, messages } = context.requestPayload
 
   await context.run("salvando-chat", async () => {
-    await saveChat({
-      userId,
-      chatId,
-      messages,
-    })
+    // await saveChat({
+    //   userId,
+    //   chatId,
+    //   messages,
+    // })
   })
 })

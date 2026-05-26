@@ -34,11 +34,12 @@
         "dotenv": "^17.4.2",
         "drizzle-orm": "^0.45.2",
         "fuse.js": "^7.3.0",
+        "groq-sdk": "^1.2.0",
         "lucide-react": "^1.16.0",
         "motion": "^12.40.0",
         "nanoid": "^5.1.11",
         "next": "16.1.7",
-        "next-safe-action": "^8.5.2",
+        "next-safe-action": "^8.5.3",
         "next-themes": "^0.4.6",
         "nuqs": "^2.8.9",
         "pg": "^8.21.0",
@@ -1310,6 +1311,8 @@
     "graphmatch": ["graphmatch@1.1.1", "", {}, "sha512-5ykVn/EXM1hF0XCaWh05VbYvEiOL2lY1kBxZtaYsyvjp7cmWOU1XsAdfQBwClraEofXDT197lFbXOEVMHpvQOg=="],
 
     "graphql": ["graphql@16.14.0", "", {}, "sha512-BBvQ/406p+4CZbTpCbVPSxfzrZrbnuWSP1ELYgyS6B+hNeKzgrdB4JczCa5VZUBQrDa9hUngm0KnexY6pJRN5Q=="],
+
+    "groq-sdk": ["groq-sdk@1.2.0", "", { "bin": { "groq-sdk": "bin/cli" } }, "sha512-pMhSYXWcjiqvbOeKdv2zjci1BYjGdp04a40hnmQmJpKJyB6oa+gRndAqE128gwR0NLgYO+Wt1fIF46KNHcplsw=="],
 
     "hachure-fill": ["hachure-fill@0.5.2", "", {}, "sha512-3GKBOn+m2LX9iq+JC1064cSFprJY4jL1jCXTcpnfER5HYE2l/4EfWSGzkPa/ZDBmYI0ZOEj5VHV/eKnPGkHuOg=="],
 

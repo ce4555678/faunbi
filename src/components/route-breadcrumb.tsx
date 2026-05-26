@@ -21,6 +21,7 @@ import {
 
 const routeLabels: Record<string, string> = {
   chatbot: "Assistente",
+  dashboard: "Dashboard",
   chat: "Chat",
   history: "Histórico",
   transcricoes: "Transcrições",

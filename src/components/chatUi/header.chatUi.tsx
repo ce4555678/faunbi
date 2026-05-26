@@ -8,32 +8,16 @@ type ChatHeaderProps = {
   onNewChat: () => void
 }
 
-export default function HeaderChatUi({
-  hasMessages,
-  isBusy,
-  onNewChat,
-}: ChatHeaderProps) {
+export default function HeaderChatUi({ isBusy, onNewChat }: ChatHeaderProps) {
   return (
-    <div className="mb-3 flex shrink-0 items-center justify-between gap-3">
-      <div className="min-w-0">
-        <h2 className="truncate text-sm font-semibold tracking-tight sm:text-base">
-          Conversa
-        </h2>
-
-        <p className="hidden text-xs text-muted-foreground sm:block">
-          Use o assistente para analisar arquivos, resumir conteúdos e tirar
-          dúvidas.
-        </p>
-      </div>
-
+    <div className="mb-4 flex shrink-0 items-center justify-end">
       <Button
-        className="h-9 shrink-0 gap-2 rounded-full px-3 text-xs sm:h-10 sm:px-4 sm:text-sm"
+        className="h-10 shrink-0 gap-2 rounded-full border border-blue-400/30 bg-blue-600 px-4 text-sm font-medium text-white shadow-lg shadow-blue-600/25 hover:bg-blue-500 disabled:opacity-50 sm:h-11 sm:px-5"
         onClick={onNewChat}
-        variant="outline"
-        disabled={!hasMessages || isBusy}
+        disabled={isBusy}
       >
         <PlusIcon className="size-4" />
-        <span className="hidden sm:inline">Nova conversa</span>
+        <span className="hidden sm:inline">Novo atendimento</span>
         <span className="sm:hidden">Novo</span>
       </Button>
     </div>
