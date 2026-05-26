@@ -8,13 +8,10 @@ import {
   PromptInputTextarea,
   usePromptInputAttachments,
 } from "@/components/ai-elements/prompt-input"
-import { SpeechInput } from "@/components/ai-elements/speech-input"
 import ChatUi from "."
 import { ChatStatus } from "ai"
 import { PlusIcon } from "lucide-react"
-import { useCallback, useEffect, useRef } from "react"
 import { toast } from "sonner"
-import { transcribeChatAudio } from "@/app/(private)/assistente/actions"
 
 type ChatInputProps = {
   text: string
@@ -46,7 +43,7 @@ export default function InputChatUi({
         accept="image/*,application/pdf"
         maxFileSize={10 * 1024 * 1024}
         maxFiles={3}
-        className="overflow-hidden rounded-3xl border border-slate-200 bg-white px-3 py-2 shadow-[0_18px_45px_rgba(15,23,42,.08)] transition focus-within:border-blue-400/70 focus-within:shadow-[0_0_0_1px_rgba(59,130,246,.24),0_20px_60px_rgba(37,99,235,.10)] dark:border-slate-700/80 dark:bg-slate-950/95 dark:shadow-[0_0_0_1px_rgba(59,130,246,.18),0_18px_60px_rgba(0,0,0,.36)] dark:focus-within:border-blue-400/60 dark:focus-within:shadow-[0_0_0_1px_rgba(59,130,246,.45),0_20px_70px_rgba(37,99,235,.14)] [&_[data-slot=input-group]]:h-auto [&_[data-slot=input-group]]:flex-wrap [&_[data-slot=input-group]]:border-0 [&_[data-slot=input-group]]:bg-transparent"
+        className="overflow-hidden rounded-3xl border border-slate-200 bg-white px-3 py-2 shadow-[0_18px_45px_rgba(15,23,42,.08)] transition focus-within:border-blue-400/70 focus-within:shadow-[0_0_0_1px_rgba(59,130,246,.24),0_20px_60px_rgba(37,99,235,.10)] dark:border-slate-700/80 dark:bg-slate-950/95 dark:shadow-[0_0_0_1px_rgba(59,130,246,.18),0_18px_60px_rgba(0,0,0,.36)] dark:focus-within:border-blue-400/60 dark:focus-within:shadow-[0_0_0_1px_rgba(59,130,246,.45),0_20px_70px_rgba(37,99,235,.14)] **:data-[slot=input-group]:h-auto **:data-[slot=input-group]:flex-wrap **:data-[slot=input-group]:border-0 **:data-[slot=input-group]:bg-transparent"
         globalDrop
         multiple
       >
@@ -61,7 +58,8 @@ export default function InputChatUi({
             rows={1}
             className="no-scrollbar max-h-32 min-h-11 flex-1 resize-none px-2 py-3 text-[15px] leading-5 text-slate-900 placeholder:text-slate-400 sm:text-base dark:text-slate-100 dark:placeholder:text-slate-500"
           />
-          <AudioButton text={text} setText={setText} disabled={isBusy} />
+          {/* <AudioText setText={setText} disable={isBusy}/> */}
+          {/* <AudioButton text={text} setText={setText} disabled={isBusy} /> */}
           <SubmitButton text={text} isBusy={isBusy} status={status} />
         </PromptInputBody>
       </PromptInput>
@@ -105,66 +103,5 @@ function UploadButton() {
     >
       <PlusIcon className="size-5" />
     </PromptInputButton>
-  )
-}
-
-function AudioButton({
-  disabled,
-  text,
-  setText,
-}: {
-  disabled: boolean
-  text: string
-  setText: (text: string) => void
-}) {
-  const latestTextRef = useRef(text)
-
-  useEffect(() => {
-    latestTextRef.current = text
-  }, [text])
-
-  const handleTranscriptionChange = useCallback(
-    (transcript: string) => {
-      setText(
-        [latestTextRef.current.trim(), transcript.trim()]
-          .filter(Boolean)
-          .join(" ")
-      )
-    },
-    [setText]
-  )
-
-  const handleAudioRecorded = useCallback(
-    async (audioBlob: Blob, durationMs: number) => {
-      const audioFile = new File([audioBlob], "audio.webm", {
-        type: audioBlob.type,
-      })
-
-      const result = await transcribeChatAudio({ audio: audioFile, durationMs })
-
-      if (result?.serverError || result?.validationErrors) {
-        toast.error(
-          result?.serverError ?? "O audio deve ter no maximo 30 segundos."
-        )
-        return ""
-      }
-
-      return result?.data?.text ?? ""
-    },
-    []
-  )
-
-  return (
-    <SpeechInput
-      className="size-11 rounded-full bg-transparent text-slate-500 shadow-none hover:bg-slate-100 hover:text-slate-950 data-[recording=true]:bg-red-500/15 data-[recording=true]:text-red-600 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white dark:data-[recording=true]:bg-red-500/20 dark:data-[recording=true]:text-red-100"
-      disabled={disabled}
-      lang="pt-BR"
-      maxDurationMs={30_000}
-      onAudioRecorded={handleAudioRecorded}
-      onTranscriptionChange={handleTranscriptionChange}
-      size="icon"
-      type="button"
-      variant="ghost"
-    />
   )
 }

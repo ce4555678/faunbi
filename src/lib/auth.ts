@@ -1,4 +1,3 @@
-import db from "@/db"
 import { betterAuth } from "better-auth"
 import { admin, haveIBeenPwned } from "better-auth/plugins"
 import redis from "./redis"

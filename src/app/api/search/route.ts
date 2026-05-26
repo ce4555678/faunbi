@@ -445,9 +445,9 @@ function searchMemory(query: string) {
 }
 
 export const GET = async (request: Request) => {
-  const { query } = loadSearchParams(request)
+  // const { query } = loadSearchParams(request)
 
-  const memories = searchMemory(query)
+  // const memories = searchMemory(query)
   const encrypt = encryptText.encrypt(
     "libsql://teste-ce4555678.aws-us-east-1.turso.io"
   )

@@ -4,7 +4,6 @@ import { useState } from "react"
 import { UIMessage, useChat } from "@ai-sdk/react"
 import type { PromptInputMessage } from "@/components/ai-elements/prompt-input"
 import ChatUi from "@/components/chatUi"
-import { usePathname, useRouter } from "next/navigation"
 import { generateId } from "ai"
 
 export default function ChatBot({
@@ -15,8 +14,6 @@ export default function ChatBot({
   initialMessages?: UIMessage[]
 }) {
   const [text, setText] = useState("")
-  const pathname = usePathname()
-  const router = useRouter()
   const [chatId] = useState(() => id || generateId())
 
   const { messages, status, sendMessage } = useChat({
@@ -43,13 +40,7 @@ export default function ChatBot({
   }
 
   function handleNewChat() {
-    if (pathname === "/chat") {
-      // Se já estiver em /chat, recarrega a página completamente
       window.location.reload()
-    } else if (pathname.startsWith("/chat/")) {
-      // Se for /chat/[id] (ou qualquer subpágina), redireciona para /chat
-      router.push("/chat")
-    }
   }
 
   return (
