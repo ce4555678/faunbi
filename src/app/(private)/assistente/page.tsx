@@ -4,7 +4,7 @@ import { Suspense } from "react"
 import ChatBot from "./chatbot"
 
 export const metadata: Metadata = {
-  title: "Chat",
+  title: "Assistente",
 }
 
 export default function ChatPage() {
