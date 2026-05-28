@@ -52,14 +52,14 @@ export function LoginForm({
 
   const { session } = useSessionStore()
 
-  if (session) redirect("/chatbot")
+  if (session) redirect("/dashboard")
 
   async function onSubmit({ email, password }: LoginFormValues) {
     const { error } = await authClient.signIn.email({
       email, // required
       password, // required
       rememberMe: true,
-      callbackURL: "/chatbot",
+      callbackURL: "/dashboard",
     })
 
     if (error) {
@@ -136,7 +136,7 @@ export function LoginForm({
               authClient.signIn
                 .social({
                   provider: "google",
-                  callbackURL: "/chatbot",
+                  callbackURL: "/dashboard",
                 })
                 .catch(() => {
                   toast.error("Falha ao entrar com Google", {

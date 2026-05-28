@@ -1,12 +1,9 @@
-import { drizzle } from "drizzle-orm/libsql/http"
+import { drizzle } from "drizzle-orm/node-postgres"
+import { Pool } from "pg"
 
-export default async function connectDB(userId: string) {
-  const db = drizzle({
-    connection: {
-      url: `libsql://${userId.toLowerCase()}-ce4555678.aws-us-east-1.turso.io`,
-      authToken: process.env.TURSO_AUTH_TOKEN,
-    },
-  })
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL!,
+})
+const db = drizzle({ client: pool })
 
-  return db
-}
+export default db

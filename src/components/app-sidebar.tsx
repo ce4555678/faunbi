@@ -72,7 +72,7 @@ const data = {
       icon: <CircleDollarSignIcon className="size-4" />,
     },
     {
-      title: "Orcamentos",
+      title: "Orçamentos",
       url: "/budgets",
       icon: <FileTextIcon className="size-4" />,
     },
