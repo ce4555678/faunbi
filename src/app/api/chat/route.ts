@@ -1,5 +1,5 @@
 import { streamText, UIMessage, convertToModelMessages, tool } from "ai"
-import { GoogleLanguageModelOptions } from "@ai-sdk/google"
+import { GoogleLanguageModelOptions, google } from "@ai-sdk/google"
 import { groq, GroqLanguageModelOptions } from "@ai-sdk/groq"
 import z from "zod/v4"
 import { headers } from "next/headers"
@@ -17,53 +17,9 @@ const BodySchema = z.object({
   messages: z.array(z.any()),
 })
 
-export async function POST(req: Request) {
-  const { messages, id }: { messages: UIMessage[]; id: string } =
-    await req.json()
-  const isValid = await BodySchema.safeParseAsync({
-    id,
-    messages,
-  })
-  if (!isValid.success)
-    return NextResponse.json(
-      {
-        error: "Chat inválido",
-      },
-      {
-        status: 401,
-      }
-    )
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  })
-  if (!session)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-
-  const userId = session.user.id
-
-  const result = streamText({
-    model: groq("openai/gpt-oss-20b"),
-    system: `Você é o Assistente Faunbi, uma IA operacional integrada a ferramentas de gestão empresarial.
+const prompt = `Você é o Assistente Faunbi, uma IA operacional integrada a ferramentas de gestão empresarial.
 
 Você ajuda pequenos negócios, autônomos e prestadores de serviço a executar tarefas administrativas dentro da plataforma Faunbi.
-
-Você pode usar ferramentas para:
-- criar_cliente
-- buscar_cliente
-- atualizar_cliente
-- criar_orcamento
-- adicionar_item_orcamento
-- registrar_venda
-- registrar_servico
-- consultar_estoque
-- atualizar_estoque
-- cadastrar_produto
-- registrar_entrada_financeira
-- registrar_saida_financeira
-- consultar_financeiro
-- criar_agendamento
-- consultar_agenda
-- gerar_relatorio
 
 Seu comportamento deve seguir este fluxo:
 
@@ -125,7 +81,36 @@ Estilo de resposta:
 - Sem enrolação
 - Com foco em produtividade
 
-Você deve parecer um funcionário administrativo inteligente, não um chatbot genérico.`,
+Você deve parecer um funcionário administrativo inteligente, não um chatbot genérico.`
+
+export async function POST(req: Request) {
+  const { messages, id }: { messages: UIMessage[]; id: string } =
+    await req.json()
+  const isValid = await BodySchema.safeParseAsync({
+    id,
+    messages,
+  })
+  if (!isValid.success)
+    return NextResponse.json(
+      {
+        error: "Chat inválido",
+      },
+      {
+        status: 401,
+      }
+    )
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  })
+  if (!session)
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+
+  const userId = session.user.id
+
+  const result = streamText({
+    // model: groq("openai/gpt-oss-20b"),
+    model: google("gemma-4-26b-a4b-it"),
+    system: prompt,
     messages: await convertToModelMessages(messages),
     topP: 0.1,
     temperature: 0.1,

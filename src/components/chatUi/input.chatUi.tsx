@@ -84,7 +84,7 @@ function SubmitButton({
 
   return (
     <PromptInputSubmit
-      className="size-11 rounded-lg bg-gray-600 text-white hover:bg-gray-500 active:bg-gray-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none dark:bg-gray-500 dark:hover:bg-gray-400 dark:active:bg-gray-600 dark:shadow-gray-500/25 dark:disabled:bg-slate-800 dark:disabled:text-slate-600"
+      className="size-11 rounded-lg bg-gray-600 text-white hover:bg-gray-500 active:bg-gray-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none dark:bg-blue-500 dark:hover:bg-blue-400 dark:active:bg-gray-600 dark:shadow-gray-500/25 dark:disabled:bg-slate-800 dark:disabled:text-slate-600"
       disabled={isBusy || !hasMessage}
       status={status}
     />

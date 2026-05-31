@@ -6,10 +6,11 @@ import {
   pgEnum,
   timestamp,
   index,
+  bigint,
 } from "drizzle-orm/pg-core"
-import { relations, sql } from "drizzle-orm"
-import { userTable } from "./users.db"
+import { relations } from "drizzle-orm"
 import { customerTable } from "./customer.db"
+import { companieTable } from "./companie.db"
 
 // O ciclo de vida do dinheiro do autônomo
 export const orderStatusEnum = pgEnum("order_status", [
@@ -34,15 +35,16 @@ export interface OrderItemType {
 export const orderTable = pgTable(
   "orders",
   {
-    id: text("id")
-      .primaryKey()
-      .$defaultFn(() => sql`gen_random_uuid()`),
-
-    userId: text("user_id")
+    id: bigint({
+        mode: "number"
+      }).primaryKey().generatedAlwaysAsIdentity(),
+    enterpriseId: text("enterprise_id")
       .notNull()
-      .references(() => userTable.id, { onDelete: "cascade" }),
+      .references(() => companieTable.id, { onDelete: "cascade" }),
 
-    customerId: text("customer_id")
+    customerId: bigint("customer_id", {
+      mode: "number"
+    })
       .notNull()
       .references(() => customerTable.id, { onDelete: "cascade" }),
 
@@ -66,15 +68,15 @@ export const orderTable = pgTable(
     updatedAt: timestamp("updated_at"),
   },
   (table) => [
-    index("order_userId_status_idx").on(table.userId, table.status),
+    index("order_enterpriseId_status_idx").on(table.enterpriseId, table.status),
     index("order_customerId_idx").on(table.customerId),
   ]
 )
 
 export const orderRelations = relations(orderTable, ({ one }) => ({
-  user: one(userTable, {
-    fields: [orderTable.userId],
-    references: [userTable.id],
+  companie: one(companieTable, {
+    fields: [orderTable.enterpriseId],
+    references: [companieTable.id],
   }),
   customer: one(customerTable, {
     fields: [orderTable.customerId],

@@ -5,20 +5,21 @@ import {
   timestamp,
   index,
   numeric,
+  bigint,
 } from "drizzle-orm/pg-core"
-import { userTable } from "./users.db"
 import { relations, sql } from "drizzle-orm"
+import { companieTable } from "./companie.db"
 
 export const serviceTable = pgTable(
   "services",
   {
-    id: text("id")
-      .primaryKey()
-      .$defaultFn(() => sql`gen_random_uuid()`), // Ou UUIDv7 nativo do banco se disponível
+    id: bigint({
+        mode: "number"
+      }).primaryKey().generatedAlwaysAsIdentity(), // Ou UUIDv7 nativo do banco se disponível
 
-    userId: text("user_id")
+    enterpriseId: text("enterprise_id")
       .notNull()
-      .references(() => userTable.id, { onDelete: "cascade" }),
+      .references(() => companieTable.id, { onDelete: "cascade" }),
     price: numeric("price", { precision: 10, scale: 2 }).notNull(),
     description: text().notNull(),
     details: text(),
@@ -27,7 +28,7 @@ export const serviceTable = pgTable(
     updatedAt: timestamp("updated_at"),
   },
   (table) => [
-    index("service_userId_idx").on(table.userId),
+    index("service_userId_idx").on(table.enterpriseId),
     index("name_service_search_index").using(
       "gin",
       sql`to_tsvector('portuguese', ${table.description})`
@@ -36,8 +37,8 @@ export const serviceTable = pgTable(
 )
 
 export const serviceRelations = relations(serviceTable, ({ one }) => ({
-  user: one(userTable, {
-    fields: [serviceTable.userId],
-    references: [userTable.id],
+  companie: one(companieTable, {
+    fields: [serviceTable.enterpriseId],
+    references: [companieTable.id],
   }),
 }))

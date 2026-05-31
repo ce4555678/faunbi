@@ -5,7 +5,7 @@
     "": {
       "name": "faunbi",
       "dependencies": {
-        "@ai-sdk/google": "^3.0.79",
+        "@ai-sdk/google": "^3.0.80",
         "@ai-sdk/groq": "^3.0.39",
         "@ai-sdk/react": "^3.0.193",
         "@base-ui/react": "^1.5.0",
@@ -15,6 +15,7 @@
         "@better-auth/prisma-adapter": "^1.6.11",
         "@hookform/resolvers": "^5.4.0",
         "@huggingface/transformers": "^4.2.0",
+        "@neondatabase/serverless": "^1.1.0",
         "@prisma/client": "^7.8.0",
         "@radix-ui/react-use-controllable-state": "^1.2.2",
         "@serwist/next": "^9.5.11",
@@ -43,13 +44,12 @@
         "next-safe-action": "^8.5.3",
         "next-themes": "^0.4.6",
         "nuqs": "^2.8.9",
-        "pg": "^8.21.0",
         "react": "^19.2.6",
         "react-dom": "^19.2.6",
-        "react-email": "^6.4.0",
+        "react-email": "^6.5.0",
         "react-hook-form": "^7.76.1",
         "resend": "^6.12.4",
-        "shadcn": "^4.8.1",
+        "shadcn": "^4.8.2",
         "sonner": "^2.0.7",
         "streamdown": "^2.5.0",
         "tailwind-merge": "^3.6.0",
@@ -417,6 +417,8 @@
     "@napi-rs/wasm-runtime": ["@napi-rs/wasm-runtime@0.2.12", "", { "dependencies": { "@emnapi/core": "^1.4.3", "@emnapi/runtime": "^1.4.3", "@tybys/wasm-util": "^0.10.0" } }, "sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ=="],
 
     "@neon-rs/load": ["@neon-rs/load@0.0.4", "", {}, "sha512-kTPhdZyTQxB+2wpiRcFWrDcejc4JI6tkPuS7UZCG4l6Zvc5kU/gGQ/ozvHTh1XR5tS+UlfAfGuPajjzQjCiHCw=="],
+
+    "@neondatabase/serverless": ["@neondatabase/serverless@1.1.0", "", {}, "sha512-r3ZZhRjEcfEdKIZnoB1RusNgvHuaBRqfCzV4Gi+5A9yUX0S4HTws/ASWqt13wL4y4I+0rqsWGdA2w7EQXHi3+Q=="],
 
     "@next/env": ["@next/env@16.1.7", "", {}, "sha512-rJJbIdJB/RQr2F1nylZr/PJzamvNNhfr3brdKP6s/GW850jbtR70QlSfFselvIBbcPUOlQwBakexjFzqLzF6pg=="],
 

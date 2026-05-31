@@ -1,7 +1,7 @@
-import { pgTable, text, varchar, pgEnum, jsonb, timestamp, index, uniqueIndex } from 'drizzle-orm/pg-core';
-import { userTable } from './users.db';
+import { pgTable, text, varchar, pgEnum, jsonb, timestamp, index, uniqueIndex, integer, bigint } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
 import { orderTable } from './order.db';
+import { companieTable } from './companie.db';
 
 export const personTypeEnum = pgEnum('person_type', ['PF', 'PJ']);
 
@@ -21,18 +21,18 @@ export interface PhonesType {
 }
 
 export const customerTable = pgTable('customers', {
-  id: text('id')
-    .primaryKey()
-    .$defaultFn(() => sql`gen_random_uuid()`), // Ou UUIDv7 nativo do banco se disponível
+  id: bigint({
+    mode: "number"
+  }).primaryKey().generatedAlwaysAsIdentity(),
     
   name: text('name').notNull(),
   
   // Removido o notNull para evitar fricção no onboarding via WhatsApp
   type: personTypeEnum('type').default('PF'), 
   
-  userId: text("user_id")
+  enterpriseId: text("enterprise_id")
     .notNull()
-    .references(() => userTable.id, { onDelete: "cascade" }),
+    .references(() => companieTable.id, { onDelete: "cascade" }),
   
   // O documento NÃO pode ser notNull global e o Unique deve ser composto por Tenant/User
   document: varchar('document', { length: 14 }), 
@@ -44,10 +44,10 @@ export const customerTable = pgTable('customers', {
   updatedAt: timestamp("updated_at")
 }, (table) => [
   // ÍNDICE CRÍTICO: Isola a busca de clientes por usuário primeiro
-  index("customer_userId_idx").on(table.userId),
+  index("customer_enterpriseId_idx").on(table.enterpriseId),
   
   // Correção do UNIQUE: O cliente é único DENTRO do universo daquele profissional
-  uniqueIndex("customer_user_document_unique_idx").on(table.userId, table.document),
+  uniqueIndex("customer_enterprise_document_unique_idx").on(table.enterpriseId, table.document),
   
   // Busca textual otimizada para o autocomplete no WhatsApp
   index("name_customer_search_index").using(
@@ -57,9 +57,9 @@ export const customerTable = pgTable('customers', {
 ]);
 
 export const customerRelations = relations(customerTable, ({ one, many }) => ({
-  user: one(userTable, {
-    fields: [customerTable.userId],
-    references: [userTable.id],
+  companie: one(companieTable, {
+    fields: [customerTable.enterpriseId],
+    references: [companieTable.id],
   }),
   orders: many(orderTable)
 }));
