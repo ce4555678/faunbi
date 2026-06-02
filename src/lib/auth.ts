@@ -7,11 +7,13 @@ import { i18n } from "@better-auth/i18n"
 import clientTrigger from "./client-trigger"
 import { BASE_URL } from "./utils"
 import db from "@/db"
-import { drizzleAdapter } from "@better-auth/drizzle-adapter";
+import { drizzleAdapter } from "@better-auth/drizzle-adapter"
 import schema from "@/db/schema"
-
+import { companyTable } from "@/db/schema/company.db"
+import { eq } from "drizzle-orm"
 
 export const auth = betterAuth({
+  appName: "Faunbi",
   plugins: [
     admin(),
     haveIBeenPwned({
@@ -106,6 +108,22 @@ export const auth = betterAuth({
     minPasswordLength: 8,
     maxPasswordLength: 100,
   },
+  session: {
+    additionalFields: {
+      companyId: {
+        type: "string",
+        required: false,
+      },
+      companyImage: {
+        type: "string",
+        required: false,
+      },
+      companyName: {
+        type: "string",
+        required: false,
+      },
+    },
+  },
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -125,11 +143,29 @@ export const auth = betterAuth({
       await redis.del(key)
     },
   },
- database: drizzleAdapter(db, { 
+  database: drizzleAdapter(db, {
     provider: "pg", // or "pg" or "mysql"
-    schema: schema
+    schema: schema,
   }),
   databaseHooks: {
+    session: {
+      create: {
+        before: async (session) => {
+          const [company] = await db
+            .select()
+            .from(companyTable)
+            .where(eq(companyTable.userId, session.userId))
+          return {
+            data: {
+              ...session,
+              companyId: company.id,
+              companyImage: company.logo,
+              companyName: company.businessName,
+            },
+          }
+        },
+      },
+    },
     user: {
       create: {
         after: async (user) => {
@@ -149,3 +185,5 @@ export const auth = betterAuth({
     },
   },
 })
+
+export type Session = typeof auth.$Infer.Session

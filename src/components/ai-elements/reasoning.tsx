@@ -39,7 +39,9 @@ const ReasoningContext = createContext<ReasoningContextValue | null>(null)
 export const useReasoning = () => {
   const context = useContext(ReasoningContext)
   if (!context) {
-    throw new Error("Os componentes de Raciocínio (Reasoning) devem ser usados dentro de um Reasoning Provider")
+    throw new Error(
+      "Os componentes de Raciocínio (Reasoning) devem ser usados dentro de um Reasoning Provider"
+    )
   }
   return context
 }

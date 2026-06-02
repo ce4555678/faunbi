@@ -40,7 +40,7 @@ export default function ChatBot({
   }
 
   function handleNewChat() {
-      window.location.reload()
+    window.location.reload()
   }
 
   return (

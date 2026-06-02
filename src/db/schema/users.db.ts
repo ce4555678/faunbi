@@ -1,7 +1,7 @@
-import { relations } from "drizzle-orm";
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
-import { accountTable } from "./account.db";
-import { companieTable } from "./companie.db";
+import { relations } from "drizzle-orm"
+import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core"
+import { accountTable } from "./account.db"
+import { companyTable } from "./company.db"
 
 export const userTable = pgTable("user", {
   id: text("id").primaryKey(),
@@ -18,9 +18,9 @@ export const userTable = pgTable("user", {
   banned: boolean("banned").default(false),
   banReason: text("ban_reason"),
   banExpires: timestamp("ban_expires"),
-});
+})
 
 export const userRelations = relations(userTable, ({ many }) => ({
   accounts: many(accountTable),
-  companies: many(companieTable)
-}));
+  companies: many(companyTable),
+}))

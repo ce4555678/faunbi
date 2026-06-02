@@ -5,7 +5,7 @@ import {
   boolean,
   integer,
   index,
-} from "drizzle-orm/pg-core";
+} from "drizzle-orm/pg-core"
 
 export const apikeyTable = pgTable(
   "apikey",
@@ -37,6 +37,5 @@ export const apikeyTable = pgTable(
     index("apikey_configId_idx").on(table.configId),
     index("apikey_referenceId_idx").on(table.referenceId),
     index("apikey_key_idx").on(table.key),
-  ],
-);
-
+  ]
+)

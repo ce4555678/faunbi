@@ -10,7 +10,7 @@ import {
   bigint,
 } from "drizzle-orm/pg-core"
 import { relations, sql } from "drizzle-orm"
-import { companieTable } from "./companie.db"
+import { companyTable } from "./company.db"
 
 export interface PricingType {
   costPrice: string
@@ -37,13 +37,13 @@ export const inventoryTable = pgTable(
     brand: varchar("brand", { length: 100 }),
     ncm: text(),
 
-    // REDUÇÃO DE DIMENSÕES: Mudado para 384 para aceitar modelos ultra-baratos e rápidos
+    // REDUÇÃO DE DIMENSÕES: Mudado para 768 para aceitar modelos ultra-baratos e rápidos
     // Se mantiver OpenAI reduza no payload de envio para 512 ou use 1536. Nunca 1024 sem motivo claro.
-    embedding: vector({ dimensions: 384 }),
+    embedding: vector({ dimensions: 768 }),
 
-    enterpriseId: text("enterprise_id")
+    companyId: text("company_id")
       .notNull()
-      .references(() => companieTable.id, { onDelete: "cascade" }),
+      .references(() => companyTable.id, { onDelete: "cascade" }),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at"),
   },
@@ -58,13 +58,13 @@ export const inventoryTable = pgTable(
       "gin",
       sql`to_tsvector('portuguese', coalesce(${table.name}, '') || ' ' || coalesce(${table.details}, ''))`
     ),
-    index("inventory_enterpriseId_idx").on(table.enterpriseId),
+    index("inventory_companyId_idx").on(table.companyId),
   ]
 )
 
 export const inventoryRelations = relations(inventoryTable, ({ one }) => ({
-  companie: one(companieTable, {
-    fields: [inventoryTable.enterpriseId],
-    references: [companieTable.id],
+  company: one(companyTable, {
+    fields: [inventoryTable.companyId],
+    references: [companyTable.id],
   }),
 }))

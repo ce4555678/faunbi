@@ -17,11 +17,10 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   const setSessionStore = useEffectEvent(() => {
     if (!isPending && session) {
       const { userId } = session.session
-      const { name, email, image } = session.user
+      const { image } = session.user
       setSession({
+        ...session.user,
         id: userId,
-        name: name,
-        email: email,
         image: image || undefined,
       })
     }

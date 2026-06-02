@@ -7,7 +7,7 @@ import { z } from "zod"
 const MAX_AUDIO_DURATION_MS = 30_000
 const MAX_AUDIO_SIZE_BYTES = 20 * 1024 * 1024
 
-export const transcribeChatAudio = actionClient
+export const audioTranscriptAction = actionClient
   .schema(
     z.object({
       audio: z.instanceof(File),

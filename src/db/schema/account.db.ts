@@ -1,6 +1,6 @@
-import { index, pgTable, text, timestamp } from "drizzle-orm/pg-core";
-import { userTable } from "./users.db";
-import { relations } from "drizzle-orm";
+import { index, pgTable, text, timestamp } from "drizzle-orm/pg-core"
+import { userTable } from "./users.db"
+import { relations } from "drizzle-orm"
 
 export const accountTable = pgTable(
   "account",
@@ -23,12 +23,12 @@ export const accountTable = pgTable(
       .$onUpdate(() => /* @__PURE__ */ new Date())
       .notNull(),
   },
-  (table) => [index("account_userId_idx").on(table.userId)],
-);
+  (table) => [index("account_userId_idx").on(table.userId)]
+)
 
 export const accountRelations = relations(accountTable, ({ one }) => ({
   user: one(userTable, {
     fields: [accountTable.userId],
     references: [userTable.id],
   }),
-}));
+}))

@@ -12,7 +12,6 @@ const schema = {
   cutomer: customerTable,
   inventory: inventoryTable,
   order: orderTable,
-  
 }
 
 export default schema
